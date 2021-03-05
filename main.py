@@ -1,4 +1,5 @@
 import pygame, sys
 
-#test
+
 print("hello")
+print("het werkt!")
