@@ -3,7 +3,7 @@ import sys  # import sys for properly stopping game and other Python Runtime fun
 import time  # import time to build delays and pause running code
 import threading  # import threading for running multiple functions at once
 import logging  # import logging to log things
-import data  # import constant data like colors and files
+import common_data  # import constant data like colors and files
 
 # initializes PyGame functions
 pygame.init()
@@ -39,3 +39,4 @@ while running:  # Run until running state changes
     threading.Thread(target=quit_event(), args=(1,), daemon=True)
     # Send log that thread creation is successful
     thread_function("quit_event", 1)
+
