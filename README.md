@@ -6,7 +6,7 @@ Natural Selection is a school project for informatics which whole goal was learn
 The game is very much a work in progress, might never be fully completed and thus does not have a release date. 
 
 # How do I contribute?
-You don't. First of all, contributing to this project will make our project invalid because of contribution by 'strangers' which makes it no longer fully our work. Therefore we can no longer use for our school project. (after 06/25/2021 can be made)
+You don't. First of all, contributing to this project will make our project invalid because of contribution by 'strangers' which makes it no longer fully our work. Therefore we can no longer use for our school project. (after 06/25/2021 contributions can be made)
 Secondly, this is not meant as a serious game. It might never get fully finished.
 If you really want to contribute (after 06/25/2021), just make a pull request.
 
