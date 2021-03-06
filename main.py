@@ -4,7 +4,7 @@ import time  # import time to build delays and pause running code
 import threading  # import threading for running multiple functions at once
 import logging  # import logging to log things
 import common_data as data  # import constant data like colors and sizes
-import classes as cl  # import functions en classes from classes.py
+import classes as cl  # import functions en classes (not yet) from classes.py
 
 # initializes PyGame functions
 pygame.init()

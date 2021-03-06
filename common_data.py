@@ -3,6 +3,7 @@ import pygame
 # initializes PyGame functions
 pygame.init()
 
+
 # define commonly used colors, textures and icons
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)

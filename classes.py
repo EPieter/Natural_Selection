@@ -1,5 +1,6 @@
 """
 This file contains functions and classes (not yet) for the main file
+Pure for make it easy to use
 """
 # imports
 import pygame  # import pygame for PyGame functionality
