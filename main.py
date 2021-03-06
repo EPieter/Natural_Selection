@@ -72,8 +72,6 @@ TEXTURE_SNOW03 = pygame.image.load("/Sprites/Seamless snow ground texture.jpg")
 TEXTURE_ICE01 = pygame.image.load("/Sprites/Seamless tileable ice snow cracks ground texture.jpg")
 
 
-
-
 # Function that monitors the escape key and terminate program if pressed
 def quit_event():
     for event in pygame.event.get():
