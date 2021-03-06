@@ -29,7 +29,7 @@ def thread_function(thread_name, success_bool):
     if success_bool:
         logging.info("Thread %s: successfully started", thread_name)
     else:
-        logging.info("Thread %s: failed to initialize", thread_name)
+        logging.error("Thread %s: failed to initialize", thread_name)
 
 
 running = True
