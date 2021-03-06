@@ -4,18 +4,20 @@ import time       # import time to build delays and pause running code
 import threading  # import threading for running multiple functions at once
 import logging    # import logging to log things
 
+# initializes PyGame functions
+pygame.init()
 
-pygame.init()  # initializes PyGame functions
-
-infoObject = pygame.display.Info()  # fetches display size
+# fetches display size
+infoObject = pygame.display.Info()
 
 # applies display size
 screen = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
 pygame.display.toggle_fullscreen()
 
-
 running = True
-while running:  # Run until user asks to quit
+while running:  # Run until running state changes
+
+    # Function that monitors the escape key and terminate program if pressed
     def quit_event():                       # TODO: Move this function outside of the while loop
         for event in pygame.event.get():
             key_pressed = pygame.key.get_pressed()
@@ -23,10 +25,14 @@ while running:  # Run until user asks to quit
                 pygame.quit()
                 sys.exit()
 
+    # Function used for logging state of thread
     def thread_function(thread_name, success_bool):         # TODO: Move this function outside of the while loop
         if success_bool:
             logging.info("Thread %s: successfully started", thread_name)
         else:
             logging.info("Thread %s: failed to initialize", thread_name)
+
+    # Creates a thread that runs quit_event()
     threading.Thread(target=quit_event(), args=(1,), daemon=True)
+    # Send log that thread creation is successful
     thread_function("quit_event", 1)
