@@ -14,6 +14,16 @@ infoObject = pygame.display.Info()
 screen = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
 pygame.display.toggle_fullscreen()
 
+# define commonly used colors, textures and icons
+COLOR_BLACK = (0, 0, 0)
+COLOR_WHITE = (255, 255, 255)
+COLOR_RED = (255, 0, 0)
+COLOR_GREEN = (0, 255, 0)
+COLOR_BLUE = (0, 0, 255)
+TEXTURE_GRASS1 = pygame.image.load()
+TEXTURE_ROCK1 = pygame.image.load()
+TEXTURE_DIRT1 = pygame.image.load()
+
 
 # Function that monitors the escape key and terminate program if pressed
 def quit_event():
@@ -38,3 +48,4 @@ while running:  # Run until running state changes
     threading.Thread(target=quit_event(), args=(1,), daemon=True)
     # Send log that thread creation is successful
     thread_function("quit_event", 1)
+
