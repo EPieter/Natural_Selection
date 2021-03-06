@@ -1,11 +1,15 @@
 import pygame
 
+# initializes PyGame functions
+pygame.init()
+
 # define commonly used colors, textures and icons
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_RED = (255, 0, 0)
 COLOR_GREEN = (0, 255, 0)
 COLOR_BLUE = (0, 0, 255)
+
 TEXTURE_GRASS01 = pygame.image.load("Sprites/Clovers 00 seamless.jpg")
 TEXTURE_GRASS02 = pygame.image.load("Sprites/Dry_patch_grass_ground_land_dirt_aerial_top_seamless_texture.jpg")
 TEXTURE_GRASS03 = pygame.image.load("Sprites/Patch grass 00 seamless.jpg")
@@ -56,3 +60,9 @@ TEXTURE_SNOW01 = pygame.image.load("Sprites/Seamless snow 2 texture.jpg")
 TEXTURE_SNOW02 = pygame.image.load("Sprites/Seamless snow texture.jpg")
 TEXTURE_SNOW03 = pygame.image.load("Sprites/Seamless snow ground texture.jpg")
 TEXTURE_ICE01 = pygame.image.load("Sprites/Seamless tileable ice snow cracks ground texture.jpg")
+
+# fetches display size
+infoObject = pygame.display.Info()
+
+# display size
+screen = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
