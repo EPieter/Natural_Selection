@@ -11,3 +11,4 @@ Secondly, this is not meant as a serious game. It might never get fully finished
 If you really want to contribute (after 06/25/2021), just make a pull request.
 
 # Notes
+Sprites used are from https://seamless-pixels.blogspot.com/p/free-seamless-ground-textures.html
