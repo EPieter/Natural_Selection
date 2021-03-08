@@ -8,7 +8,7 @@ import sys  # import sys for properly stopping game and other Python Runtime fun
 import time  # import time to build delays and pause running code
 import threading  # import threading for running multiple functions at once
 import logging  # import logging to log things
-import common_data as d  # import constant data like colors and sizes
+import common_data as data  # import constant data like colors and sizes
 
 # initializes PyGame functions
 pygame.init()
