@@ -9,3 +9,4 @@ import threading  # import threading for running multiple functions at once
 import logging as log  # import logging to log things
 import common_data as data  # import constant data like colors and sizes
 import classes as func  # import functions en classes (not yet) from classes.py
+import requests  # import for connecting to the cloud
