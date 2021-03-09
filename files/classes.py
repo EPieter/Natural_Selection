@@ -3,9 +3,6 @@ This file contains functions and classes (not yet) for the main file
 """
 from imports import *  # this module contains every module
 
-# initializes PyGame functions
-pygame.init()
-
 
 # Function that monitors the escape key and terminate program if pressed
 def quit_event():
