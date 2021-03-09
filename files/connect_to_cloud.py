@@ -15,7 +15,7 @@ def check_user(username, password):
 
     else:
         f = open('../userdata.txt', 'w')
-        f.write(username+"|"+password)
+        f.write(username + "|" + password)
         url = 'http://nsgame.nl/app/conn.php'
         url_data_before_sending = {'method': 'create_new_user', 'user': username, 'password': password}
         x = requests.post(url, data=url_data_before_sending)
