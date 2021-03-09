@@ -1,7 +1,7 @@
 """
 This file contains common data that is necessary for Natural Selection
 """
-from imports import *  # this module contains every module
+import pygame
 
 # initializes PyGame functions
 pygame.init()
