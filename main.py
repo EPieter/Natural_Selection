@@ -9,6 +9,9 @@ import os  # import for handling files and directories
 # initializes PyGame functions
 pygame.init()
 
+# start the game
+func.start_game()
+
 # sets game to full screen
 pygame.display.toggle_fullscreen()
 

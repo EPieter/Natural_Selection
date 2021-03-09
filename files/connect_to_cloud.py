@@ -3,7 +3,7 @@ import requests  # for post request to the server
 
 
 # TODO: needs to run automatically when you start the game
-def check_user(username, password):
+def check_user():
     if os.path.exists('../userdata.txt'):
         f = open('../userdata.txt')
         file_data = f.read()
@@ -15,6 +15,8 @@ def check_user(username, password):
         x = requests.post(url, data=url_data_before_sending)
 
     else:
+        username = input("username: ")
+        password = input("password: ")
         file_data_user_do_not_exist(username, password)
 
     return x.text
