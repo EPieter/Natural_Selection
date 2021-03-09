@@ -1,7 +1,7 @@
 """
 This file contains functions and classes (not yet) for the main file
 """
-from imports import * # this module contains every module
+from imports import *  # this module contains every module
 
 # initializes PyGame functions
 pygame.init()
