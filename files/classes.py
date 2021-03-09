@@ -6,7 +6,7 @@ import logging as log  # import logging to log things
 import files.common_data
 import requests  # import for connecting to the cloud
 import os  # import for handling files and directories
-import files.connect_to_cloud as conn  # import module for connecting to the cloud with functions
+import files.classes.connect_to_cloud as conn  # import module for connecting to the cloud with functions
 
 
 # function that runs when the game is starting up
