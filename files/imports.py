@@ -10,3 +10,4 @@ import logging as log  # import logging to log things
 import common_data as data  # import constant data like colors and sizes
 import classes as func  # import functions en classes (not yet) from classes.py
 import requests  # import for connecting to the cloud
+import mysql.connector  # import for connection to the cloud with mySql

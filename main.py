@@ -1,4 +1,4 @@
-from imports import *  # this module contains every module
+from files.imports import *  # this module contains every module
 
 
 # initializes PyGame functions
