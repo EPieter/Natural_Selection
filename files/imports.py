@@ -1,5 +1,5 @@
 """
-This file contains all imports for Natural Selection. This file is important for every file from the game.
+This file contains all imports for Natural Selection.
 """
 
 import pygame  # import pygame for PyGame functionality
