@@ -9,7 +9,19 @@ $conn = mysqli_connect($db_server, $db_username, $db_password, $db_name);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect value of input field
-    echo($_POST['user']);
-    echo($_POST['password']);
+    if (isset($_POST['method'])) {
+        switch ($_POST['method']) {
+            case 'get_user_data':
+                echo('get user data');
+                break;
+            case 'create_new_user':
+                echo('new user');
+                break;
+            default:
+                echo('error');
+        }
+    } else {
+        echo('There is an error');
+    }
   }
 ?>

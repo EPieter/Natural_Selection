@@ -8,21 +8,17 @@ def check_user(username, password):
         file_data = f.read()
         file_data = file_data.split("|")
         user = file_data[0]
-        passw = file_data[1]
+        user_pass = file_data[1]
         url = 'http://nsgame.nl/app/conn.php'
-        url_data_before_sending = {'get_user_data': 'True', 'user': user, 'password': passw}
+        url_data_before_sending = {'method': 'get_user_data', 'user': user, 'password': user_pass}
         x = requests.post(url, data=url_data_before_sending)
 
     else:
         f = open('../userdata.txt', 'w')
         f.write(username+"|"+password)
         url = 'http://nsgame.nl/app/conn.php'
-        url_data_before_sending = {'user': username}
+        url_data_before_sending = {'method': 'create_new_user', 'user': username, 'password': password}
+        x = requests.post(url, data=url_data_before_sending)
         # TODO: else in this function
-
-    url = 'http://nsgame.nl/app/conn.php'
-    url_data_before_sending = {'user': 'connected'}
-
-    x = requests.post(url, data=url_data_before_sending)
 
     return x.text
