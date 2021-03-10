@@ -64,9 +64,3 @@ TEXTURE_SNOW01 = pg.image.load("Sprites/Seamless snow 2 texture.jpg")
 TEXTURE_SNOW02 = pg.image.load("Sprites/Seamless snow texture.jpg")
 TEXTURE_SNOW03 = pg.image.load("Sprites/Seamless snow ground texture.jpg")
 TEXTURE_ICE01 = pg.image.load("Sprites/Seamless tileable ice snow cracks ground texture.jpg")
-
-# fetches display size
-infoObject = pg.display.Info()
-
-# display size
-screen = pg.display.set_mode((infoObject.current_w, infoObject.current_h))

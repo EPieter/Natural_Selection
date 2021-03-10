@@ -5,4 +5,4 @@ import threading as thread
 import logging as log
 import time
 import requests as get
-import files.data
+import files.data as data

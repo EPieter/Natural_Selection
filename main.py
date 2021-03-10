@@ -1,5 +1,5 @@
 import files.controllers as func  # import functions en controllers (not yet) from controllers.py
-
+import files.data as data
 
 # start the game
 func.start_game()
@@ -10,4 +10,6 @@ while running:  # Run until running state changes
     func.thread.Thread(target=func.quit_event(), args=(1,), daemon=True)
     # Send log that thread creation is successful
     func.thread_function("quit_event", 1)
+    # Frame rate 60fps
+    data.clock.tick(60)
 
