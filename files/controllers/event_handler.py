@@ -9,9 +9,11 @@ def quit_event():
             pg.quit()
             sys.exit()
 
+
 def mouse_events(event):
     if event.type == 4:
         x = True
+
 
 def events():
     for event in pg.event.get():
