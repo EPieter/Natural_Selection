@@ -1,5 +1,4 @@
-import os  # for handling files and directories
-import requests  # for post request to the server
+from .imports import *
 
 
 # TODO: needs to run automatically when you start the game
@@ -12,7 +11,7 @@ def check_user():
         user_pass = file_data[1]
         url = 'http://nsgame.nl/app/conn.php'
         url_data_before_sending = {'method': 'get_user_data', 'user': user, 'password': user_pass}
-        x = requests.post(url, data=url_data_before_sending)
+        x = get.post(url, data=url_data_before_sending)
 
     else:
         username = input("username: ")
@@ -27,5 +26,5 @@ def file_data_user_do_not_exist(username, password):
     f.write(username + "|" + password)
     url = 'http://nsgame.nl/app/conn.php'
     url_data_before_sending = {'method': 'check_if_user_exist', 'user': username, 'password': password}
-    x = requests.post(url, data=url_data_before_sending)
+    x = get.post(url, data=url_data_before_sending)
     # TODO: ask for creating new user

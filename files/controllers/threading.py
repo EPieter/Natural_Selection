@@ -1,6 +1,4 @@
-import logging as log
-import threading
-import pygame
+from .imports import *
 
 
 # Function used for logging state of thread
