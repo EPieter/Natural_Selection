@@ -6,3 +6,4 @@ import logging as log
 import time
 import requests as get
 import files.data as data
+import files.classes as c_func
