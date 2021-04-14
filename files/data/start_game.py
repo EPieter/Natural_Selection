@@ -1,5 +1,8 @@
 from .imports import *
 
+zoom_level = 0  # range -10, 10
+location = [0, 0]  # range (-unlimited, +unlimited), (-unlimited, +unlimited)
+
 # fetches display size
 infoObject = pg.display.Info()
 

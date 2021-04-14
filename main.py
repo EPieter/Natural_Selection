@@ -4,7 +4,7 @@ import files.classes as c_func
 
 # start the game
 func.start_game()
-
+func.render_engine(data.zoom_level, data.location)
 running = True
 while running:  # Run until running state changes
     # Creates a thread that runs quit_event()
@@ -15,4 +15,3 @@ while running:  # Run until running state changes
 
     # Frame rate 60fps
     data.clock.tick(60)
-
