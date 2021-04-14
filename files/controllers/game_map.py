@@ -1,24 +1,31 @@
 from .imports import *
 
 
-def create_map():
-    x = True
-    # TODO make a infinite map for the game but it must not overload -> it loads the map while you are scrolling
+tileSize = 64
+screenWidth = 1920
+screenHeight = 1080
 
 
-# when mousewheel scroll down
-def zoom_out():
-    x = True
-    # TODO zoom the whole map in
+def render_engine(zoom_level=data.zoom_level, location=data.location):
+    x = location[0]
+    y = location[1]
 
 
-# when mousewheel scroll up
-def zoom_in():
-    x = True
-    # TODO zoom the whole map out
+    gridWidth = screenWidth / tileSize
+    gridHeight = screenHeight / tileSize
 
 
-# when mousewheel button pressed
-def zoom_reset():
-    x = True
-    # TODO reset the zoom back to normal
+
+
+def draw_grid(self):
+    for x in range(0, screenWidth , tileSize):
+        pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, screenHeight))
+    for y in range(0, screenHeight, tileSize):
+        pg.draw.line(self.screen, LIGHTGREY, (0, y), (screenWidth, y))
+
+
+def draw(self):
+    self.screen.fill(77, 68, 68)
+    self.draw_grid()
+    self.all_sprites.draw(self.screen)
+    pg.display.flip()
