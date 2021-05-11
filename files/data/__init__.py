@@ -1,2 +1,2 @@
-from .common_data import *
-from .start_game import *
+# from .common_data import *
+# from .start_game import *

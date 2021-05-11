@@ -1,6 +1,9 @@
-import files.controllers as func  # import functions en controllers (not yet) from controllers.py
-import files.data as data
-import files.classes as c_func
+# import files.controllers as func  # import functions en controllers (not yet) from controllers.py
+# import files.data as data
+# import files.classes as c_func
+import controllers as func
+import data
+import functions as c_func
 
 # start the game
 func.start_game()
