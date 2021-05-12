@@ -13,5 +13,3 @@ while running:  # Run until running state changes
     # Send log that thread creation is successful
     controllers.thread_function("events", 1)
 
-    # Frame rate 60fps
-    data.clock.tick(60)
