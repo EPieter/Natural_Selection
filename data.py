@@ -1,5 +1,8 @@
 import pygame as pg
 
+# initializes pg functions
+pg.init()
+
 # from files.data.start_game.py
 zoom_level = 0  # range -10, 10
 location = [0, 0]  # range (-unlimited, +unlimited), (-unlimited, +unlimited)
@@ -15,8 +18,7 @@ clock = pg.time.Clock()
 
 # from files.data.common_data.py
 
-# initializes pg functions
-pg.init()
+
 
 
 # define commonly used colors, textures and icons

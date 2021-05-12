@@ -6,19 +6,19 @@ import os
 import requests
 import time
 import data
-import controllers as func
+import controllers
 
 
 def mouse_events(event):
     if event.type == 4:
         data.zoom_level += 1
-        func.render_engine()
+        controllers.render_engine()
     elif event.type == 5:
         data.zoom_level -= 1
-        func.render_engine()
+        controllers.render_engine()
     elif event.type == 2:
         data.zoom_level = 0
-        func.render_engine()
+        controllers.render_engine()
 
 
 def second_checker(difference_x_y):
