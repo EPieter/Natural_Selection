@@ -1,4 +1,5 @@
 import pygame as pg
+import sprites
 
 # initializes pg functions
 pg.init()
@@ -8,6 +9,7 @@ zoom_level = 0  # range -10, 10
 location = [0, 0]  # range (-unlimited, +unlimited), (-unlimited, +unlimited)
 
 # fetches display size
+
 infoObject = pg.display.Info()
 
 # display size
@@ -18,16 +20,26 @@ clock = pg.time.Clock()
 
 # from files.data.common_data.py
 
+# define some colors (R, G, B)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+DARKGREY = (40, 40, 40)
+LIGHTGREY = (100, 100, 100)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
 
+# game settings
+WIDTH = 1920   # 16 * 64 or 32 * 32 or 64 * 16
+HEIGHT = 1080  # 16 * 48 or 32 * 24 or 64 * 12
+FPS = 60
+TITLE = "Natural Selection"
+BGCOLOR = DARKGREY
 
+TILESIZE = 96
+GRIDWIDTH = WIDTH / TILESIZE
+GRIDHEIGHT = HEIGHT / TILESIZE
 
-# define commonly used colors, textures and icons
-COLOR_BLACK = (0, 0, 0)
-COLOR_GREY = (77, 68, 68)
-COLOR_WHITE = (255, 255, 255)
-COLOR_RED = (255, 0, 0)
-COLOR_GREEN = (0, 255, 0)
-COLOR_BLUE = (0, 0, 255)
 
 TEXTURE_GRASS01 = pg.image.load("Sprites/Clovers 00 seamless.jpg")
 TEXTURE_GRASS02 = pg.image.load("Sprites/Dry_patch_grass_ground_land_dirt_aerial_top_seamless_texture.jpg")
