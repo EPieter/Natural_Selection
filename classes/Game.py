@@ -2,6 +2,7 @@ from data import *
 from classes import Wall
 from classes import Player
 import sys
+import os
 
 
 class Game:
@@ -11,18 +12,33 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(500, 100)
-        self.load_data()
         self.location = [MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT]
+        self.load_data()
+        self.location_x = self.location[0]
+        self.location_y = self.location[1]
         # self.location = get_location_from_server()
 
     def load_data(self):
-        pass
+        dir_set = os.path.isdir("data")
+        if dir_set:
+            try:
+                file = open("data/userdata.txt", "r")
+                file_content = file.read()
+                list_file_content = file_content.split("|")
+                self.location = [int(list_file_content[0]), int(list_file_content[1])]
+            except IOError:
+                file = open("data/userdata.txt", "x")
+        else:
+            os.mkdir('data')
+            os.system("attrib +h data")
+            file = open('data/userdata.txt', "x")
+        file.close()
 
     def new(self):
         # initialize all variables and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
-        self.player = Player.Player(self, MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT)
+        self.player = Player.Player(self, self.location_x, self.location_y)
         for x in range(10, 20):
             Wall.Wall(self, x, 5)
 
@@ -40,22 +56,21 @@ class Game:
         sys.exit()
 
     def move_player(self, dx=0, dy=0):
-        current_location = self.location
-        location_x = current_location[0]
-        location_y = current_location[1]
+        location_x = self.location_x
+        location_y = self.location_y
         dx = 0 if ((location_x == 0) and (dx == -1)) or ((location_x == (GRIDWIDTH - 1)) and (dx == 1)) else dx
         dy = 0 if ((location_y == 0) and (dy == -1)) or ((location_y == (GRIDHEIGHT - 1)) and (dy == 1)) else dy
-
-        new_location = [location_x + dx, location_y + dy]
-        self.location = new_location
+        self.location_x = location_x + dx
+        self.location_y = location_y + dy
         self.player.move(dx, dy)
 
     def update(self):
         # update portion of the game loop
         self.all_sprites.update()
 
-    def update_user_data(self):
-        pass
+    def function_before_quit(self):
+        file = open("data/userdata.txt", "w")
+        file.write(str(self.location_x) + "|" + str(self.location_y))
 
     def draw_grid(self):
         for x in range(0, MAX_CALCULATED_AREA_WIDTH, TILESIZE):
@@ -73,11 +88,11 @@ class Game:
         # catch all events here
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                self.update_user_data()
+                self.function_before_quit()
                 self.quit()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
-                    self.update_user_data()
+                    self.function_before_quit()
                     self.quit()
                 elif event.key == pg.K_LEFT:
                     self.move_player(dx=-1)
