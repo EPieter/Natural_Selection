@@ -1,4 +1,5 @@
 import pygame as pg
+import math
 import sprites
 
 # initializes pg functions
@@ -30,8 +31,10 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
 # game settings
-WIDTH = 1920   # 16 * 64 or 32 * 32 or 64 * 16
-HEIGHT = 1080  # 16 * 48 or 32 * 24 or 64 * 12
+WIDTH = infoObject.current_w  # 16 * 64 or 32 * 32 or 64 * 16
+HEIGHT = infoObject.current_h  # 16 * 48 or 32 * 24 or 64 * 12
+MAX_CALCULATED_AREA_WIDTH = WIDTH + 128
+MAX_CALCULATED_AREA_HEIGHT = HEIGHT + 128
 FPS = 60
 TITLE = "Natural Selection"
 BGCOLOR = DARKGREY
@@ -40,6 +43,10 @@ TILESIZE = 32
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
+MIDDLE_OF_THE_SCREEN = [WIDTH / 2, HEIGHT / 2]
+MIDDLE_OF_THE_SCREEN_IN_GRIDS = [math.ceil(GRIDWIDTH / 2), math.ceil(GRIDHEIGHT / 2)]
+MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH = MIDDLE_OF_THE_SCREEN_IN_GRIDS[0]
+MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT = MIDDLE_OF_THE_SCREEN_IN_GRIDS[1]
 
 TEXTURE_GRASS01 = pg.image.load("Sprites/Clovers 00 seamless.jpg")
 TEXTURE_GRASS02 = pg.image.load("Sprites/Dry_patch_grass_ground_land_dirt_aerial_top_seamless_texture.jpg")

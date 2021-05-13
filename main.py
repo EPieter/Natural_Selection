@@ -5,6 +5,7 @@ import pygame as pg
 import sys
 from sprites import *
 
+
 # start the game
 #  controllers.start_game()
 # controllers.render_engine(data.zoom_level, data.location)
@@ -25,6 +26,7 @@ while running:  # Run until running state changes
             self.clock = pg.time.Clock()
             pg.key.set_repeat(500, 100)
             self.load_data()
+            self.location = [MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT]
 
         def load_data(self):
             pass
@@ -33,7 +35,7 @@ while running:  # Run until running state changes
             # initialize all variables and do all the setup for a new game
             self.all_sprites = pg.sprite.Group()
             self.walls = pg.sprite.Group()
-            self.player = Player(self, 10, 10)
+            self.player = Player(self, MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT)
             for x in range(10, 20):
                 Wall(self, x, 5)
 
@@ -50,14 +52,25 @@ while running:  # Run until running state changes
             pg.quit()
             sys.exit()
 
+        def move_player(self, dx=0, dy=0):
+            current_location = self.location
+            location_x = current_location[0]
+            location_y = current_location[1]
+            dx = 0 if ((location_x == 0) and (dx == -1)) or ((location_x == (GRIDWIDTH - 1)) and (dx == 1)) else dx
+            dy = 0 if ((location_y == 0) and (dy == -1)) or ((location_y == (GRIDHEIGHT - 1)) and (dy == 1)) else dy
+
+            new_location = [location_x + dx, location_y + dy]
+            self.location = new_location
+            self.player.move(dx, dy)
+
         def update(self):
             # update portion of the game loop
             self.all_sprites.update()
 
         def draw_grid(self):
-            for x in range(0, WIDTH, TILESIZE):
+            for x in range(0, MAX_CALCULATED_AREA_WIDTH, TILESIZE):
                 pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
-            for y in range(0, HEIGHT, TILESIZE):
+            for y in range(0, MAX_CALCULATED_AREA_HEIGHT, TILESIZE):
                 pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
 
         def draw(self):
@@ -74,14 +87,26 @@ while running:  # Run until running state changes
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_ESCAPE:
                         self.quit()
-                    if event.key == pg.K_LEFT:
-                        self.player.move(dx=-1)
-                    if event.key == pg.K_RIGHT:
-                        self.player.move(dx=1)
-                    if event.key == pg.K_UP:
-                        self.player.move(dy=-1)
-                    if event.key == pg.K_DOWN:
-                        self.player.move(dy=1)
+                    elif event.key == pg.K_LEFT:
+                        self.move_player(dx=-1)
+                    elif event.key == pg.K_RIGHT:
+                        self.move_player(dx=1)
+                    elif event.key == pg.K_UP:
+                        self.move_player(dy=-1)
+                    elif event.key == pg.K_DOWN:
+                        self.move_player(dy=1)
+                    elif event.key == pg.K_w:
+                        self.move_player(dy=-1)
+                        # second_checker([0, 1])
+                    elif event.key == pg.K_a:
+                        self.move_player(dx=-1)
+                        # second_checker([-1, 0])
+                    elif event.key == pg.K_s:
+                        self.move_player(dy=1)
+                        # second_checker([0, -1])
+                    elif event.key == pg.K_d:
+                        self.move_player(dx=1)
+                        # second_checker([1, 0])
 
         def show_start_screen(self):
             pass
