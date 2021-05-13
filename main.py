@@ -1,11 +1,9 @@
 import controllers
 from data import *
 import functions
-import pygame as pg
 import sys
 from sprites import *
-import ClassCloud as cloud
-
+from classes import ClassCloud as cloud
 
 # start the game
 #  controllers.start_game()
