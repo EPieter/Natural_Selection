@@ -4,6 +4,7 @@ import functions
 import pygame as pg
 import sys
 from sprites import *
+import ClassCloud as cloud
 
 
 # start the game
@@ -18,6 +19,14 @@ while running:  # Run until running state changes
     controllers.thread_function("events", 1)
 
 
+    def get_location_from_server():
+        Server = cloud.UserInformation()
+        Server.get_information()
+        info = Server.get_variables().data_from_server
+        list(info)
+        return info[0]
+
+
     class Game:
         def __init__(self):
             pg.init()
@@ -27,6 +36,7 @@ while running:  # Run until running state changes
             pg.key.set_repeat(500, 100)
             self.load_data()
             self.location = [MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT]
+            # self.location = get_location_from_server()
 
         def load_data(self):
             pass
@@ -67,6 +77,9 @@ while running:  # Run until running state changes
             # update portion of the game loop
             self.all_sprites.update()
 
+        def update_user_data(self):
+            pass
+
         def draw_grid(self):
             for x in range(0, MAX_CALCULATED_AREA_WIDTH, TILESIZE):
                 pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
@@ -83,9 +96,11 @@ while running:  # Run until running state changes
             # catch all events here
             for event in pg.event.get():
                 if event.type == pg.QUIT:
+                    self.update_user_data()
                     self.quit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_ESCAPE:
+                        self.update_user_data()
                         self.quit()
                     elif event.key == pg.K_LEFT:
                         self.move_player(dx=-1)
