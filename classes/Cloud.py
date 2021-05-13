@@ -4,7 +4,7 @@ import os
 import base64
 
 
-class UserInformation:
+class Cloud:
     def __init__(self, location=None):
         if location is None:
             location = [data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT]
