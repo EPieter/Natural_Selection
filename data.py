@@ -1,6 +1,5 @@
 import pygame as pg
 import math
-import sprites
 
 # initializes pg functions
 pg.init()
