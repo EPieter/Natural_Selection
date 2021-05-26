@@ -51,3 +51,12 @@ def events():
         elif event.type == (pg.K_w or pg.K_a or pg.K_s or pg.K_d):
             key_events(event)
 
+
+def pixelConversionH(array_h):
+    pixel_h = array_h * data.TILESIZE
+    return pixel_h
+
+
+def pixelConversionV(array_v):
+    pixel_v = array_v * data.TILESIZE
+    return pixel_v

@@ -1,8 +1,12 @@
+import data
 from data import *
 from classes import Wall
 from classes import Player
+from classes import LocalCloud
+import functions
 import sys
 import os
+import pygame
 
 
 class Game:
@@ -66,7 +70,10 @@ class Game:
     def draw(self):
         self.screen.fill(BGCOLOR)
         self.draw_grid()
+        display_surface = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
+
         self.all_sprites.draw(self.screen)
+        display_surface.blit(data.TEXTURE_GRASS01, (functions.pixelConversionH(5), functions.pixelConversionV(3)))
         pg.display.flip()
 
     def events(self):
