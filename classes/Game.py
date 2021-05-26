@@ -13,26 +13,12 @@ class Game:
         self.clock = pg.time.Clock()
         pg.key.set_repeat(500, 100)
         self.location = [MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT]
-        self.load_data()
+        self.localCloud = LocalCloud.LocalCloud()
+        self.localCloud.getAllData()
+        # print(self.localCloud.getBuildingsData())
         self.location_x = self.location[0]
         self.location_y = self.location[1]
         # self.location = get_location_from_server()
-
-    def load_data(self):
-        dir_set = os.path.isdir("data")
-        if dir_set:
-            try:
-                file = open("data/userdata.txt", "r")
-                file_content = file.read()
-                list_file_content = file_content.split("|")
-                self.location = [int(list_file_content[0]), int(list_file_content[1])]
-            except IOError:
-                file = open("data/userdata.txt", "x")
-        else:
-            os.mkdir('data')
-            os.system("attrib +h data")
-            file = open('data/userdata.txt', "x")
-        file.close()
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -52,6 +38,9 @@ class Game:
             self.draw()
 
     def quit(self):
+        # self.localCloud.updateUserData()
+        file = open("data/userdata.txt", "w")
+        file.write(str(self.location_x) + "|" + str(self.location_y)+self.localCloud.standard_data_without_location)
         pg.quit()
         sys.exit()
 
@@ -67,10 +56,6 @@ class Game:
     def update(self):
         # update portion of the game loop
         self.all_sprites.update()
-
-    def function_before_quit(self):
-        file = open("data/userdata.txt", "w")
-        file.write(str(self.location_x) + "|" + str(self.location_y))
 
     def draw_grid(self):
         for x in range(0, MAX_CALCULATED_AREA_WIDTH, TILESIZE):
@@ -88,11 +73,9 @@ class Game:
         # catch all events here
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                self.function_before_quit()
                 self.quit()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
-                    self.function_before_quit()
                     self.quit()
                 elif event.key == pg.K_LEFT:
                     self.move_player(dx=-1)

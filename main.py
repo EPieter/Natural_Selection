@@ -2,6 +2,7 @@ import controllers
 import functions
 from classes import Cloud as cloud
 from classes import Game
+from classes import LocalCloud
 
 # start the game
 #  controllers.start_game()
@@ -13,7 +14,6 @@ while running:  # Run until running state changes
 
     # Send log that thread creation is successful
     controllers.thread_function("events", 1)
-
 
     def get_location_from_server():
         Server = cloud.Cloud()
