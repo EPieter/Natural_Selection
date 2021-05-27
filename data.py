@@ -4,6 +4,10 @@ import math
 # initializes pg functions
 pg.init()
 
+# url for connection with cloud
+url = "http://nsgame.nl/"
+app_url = url+"app/"
+
 # from files.data.start_game.py
 zoom_level = 0  # range -10, 10
 location = [0, 0]  # range (-unlimited, +unlimited), (-unlimited, +unlimited)

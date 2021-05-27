@@ -1,8 +1,16 @@
 import controllers
 import functions
-from classes import Cloud as cloud
+from classes import OnlineCloud as cloud
 from classes import Game
 from classes import LocalCloud
+from classes import Cloud
+
+# try connect with server
+online = Cloud.Cloud().connected_with_cloud
+if online:
+    print("Connection with server succeed")
+else:
+    print("No connection with server")
 
 # start the game
 #  controllers.start_game()
@@ -15,13 +23,12 @@ while running:  # Run until running state changes
     # Send log that thread creation is successful
     controllers.thread_function("events", 1)
 
-    def get_location_from_server():
-        Server = cloud.Cloud()
-        Server.get_information()
-        info = Server.get_variables().data_from_server
-        list(info)
-        return info[0]
-
+    # def get_location_from_server():
+    #     Server = cloud.Cloud()
+    #     Server.get_information()
+    #     info = Server.get_variables().data_from_server
+    #     list(info)
+    #     return info[0]
 
     # create the game object
     g = Game.Game()
