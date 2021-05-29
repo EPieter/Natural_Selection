@@ -6,11 +6,8 @@ from classes import LocalCloud
 from classes import Cloud
 
 # try connect with server
-online = Cloud.Cloud().connected_with_cloud
-if online:
-    print("Connection with server succeed")
-else:
-    print("No connection with server")
+Cloud.Cloud()
+
 
 # start the game
 #  controllers.start_game()
