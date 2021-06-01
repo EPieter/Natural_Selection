@@ -42,9 +42,7 @@ class Game:
             self.draw()
 
     def quit(self):
-        # self.localCloud.updateUserData()
-        file = open("data/userdata.txt", "w")
-        file.write(str(self.location_x) + "|" + str(self.location_y)+self.localCloud.standard_data_without_location)
+        self.localCloud.updateUserData([self.location_x, self.location_y])
         pg.quit()
         sys.exit()
 

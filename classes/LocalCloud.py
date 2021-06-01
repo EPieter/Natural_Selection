@@ -1,6 +1,7 @@
 import os
 import sys
 import data
+import json
 from classes import Game
 
 
@@ -10,8 +11,19 @@ class LocalCloud:
         self.player_level = None
         self.buildings = []
         self.list_file_content = []
-        self.standard_data = str(data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH)+"|"+str(data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT)+"|1|0:0:0;1:-1:0"
-        self.standard_data_without_location = "|1|0:0:0;1:-1:0"
+        self.standard_data = json.dumps({
+            'location': [data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH,
+                         data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT],
+            'level': 0,
+            'resources': {'wood': 50, 'stone': 20, },
+            'buildings': [
+                [0, 1, [0, 0]],  # city hall
+                [1, 1, [0, 1]],  # way
+            ]
+        })
+        self.userdata = {
+            'location': [0, 0],
+        }
 
     def getAllData(self):
         dir_set = os.path.isdir("data")
@@ -28,18 +40,18 @@ class LocalCloud:
             file = open('data/userdata.txt', "w")
             file.write(self.standard_data)
             file = open("data/userdata.txt", "r")
-        file_content = file.read()
         file.close()
-        self.list_file_content = file_content.split("|")
-        Game.location = [int(self.list_file_content[0]), int(self.list_file_content[1])]
+        self.getUserData()
+        Game.location = self.userdata['location']
 
-    def getBuildingsData(self):
-        buildings_data = self.list_file_content[3]
-        buildings_data = buildings_data.split(";")
-        for data_ in buildings_data:
-            new_data = data_.split(":")
-        return buildings_data
-
-    def updateUserData(self):
+    def updateUserData(self, location):
+        self.userdata['location'] = location
         file = open("data/userdata.txt", "w")
-        file.write(str(Game.Game().location_x) + "|" + str(Game.Game().location_y) + self.standard_data_without_location)
+        json_userdata = json.dumps(self.userdata)
+        file.write(json_userdata)
+
+    def getUserData(self):
+        file = open("data/userdata.txt", "r")
+        file_content = file.read()
+        file_content = json.loads(file_content)
+        self.userdata = file_content

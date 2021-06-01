@@ -1,4 +1,4 @@
-from classes import ExtraTools
+from classes import LocalCloud
 
-ExtraTools.controlImages()
+LocalCloud.LocalCloud().getAllData()
 
