@@ -71,7 +71,11 @@ class Game:
         display_surface = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
 
         self.all_sprites.draw(self.screen)
-        display_surface.blit(data.TEXTURE_GRASS01, (functions.pixelConversionH(5), functions.pixelConversionV(3)))
+        for y in range(GRIDHEIGHT):
+            for x in range(GRIDWIDTH):
+                display_surface.blit(data.TEXTURE_GRASS01, (functions.pixelConversionH(x), functions.pixelConversionV(y)))
+
+
         pg.display.flip()
 
     def events(self):
