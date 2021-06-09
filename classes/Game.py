@@ -65,6 +65,7 @@ class Game:
         for y in range(0, MAX_CALCULATED_AREA_HEIGHT, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
 
+
     def draw(self):
         self.screen.fill(BGCOLOR)
         self.draw_grid()
@@ -75,6 +76,7 @@ class Game:
                 display_surface.blit(data.TEXTURE_GRASS01, (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 
+        pygame.draw.rect(screen, (252, 0, 0))
         pg.display.flip()
 
     def events(self):
