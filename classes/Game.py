@@ -75,7 +75,7 @@ class Game:
             for x in range(GRIDWIDTH):
                 display_surface.blit(data.TEXTURE_GRASS01, (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
-
+#todo
         pygame.draw.rect(screen, (252, 0, 0))
         pg.display.flip()
 
