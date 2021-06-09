@@ -20,7 +20,10 @@ def resizeImage(size, dir_name):
         else:
             str_img = str(image).split("/")[0] + "/" + str(size) + "px/" + str(image).split("/")[2]
         img = Image.open(image)
-        img = img.resize((size, size), Image.ANTIALIAS)
+        if dir_name:
+            img = img.resize(int(size.split("px")[0]), int(size.split("px")[0]), Image.ANTIALIAS)
+        else:
+            img = img.resize((int(size), int(size)), Image.ANTIALIAS)
         img.save(str_img)
 
 
@@ -47,3 +50,4 @@ def listOfImagesDirs():
         for file in dirs:
             list_dirs.append(file) if file != "normal" else None
     return list_dirs
+

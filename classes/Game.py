@@ -16,9 +16,9 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(500, 100)
-        self.location = [MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT]
         self.localCloud = LocalCloud.LocalCloud()
-        self.localCloud.getAllData()
+        self.location = self.localCloud.getAllData()
+
         # print(self.localCloud.getBuildingsData())
         self.location_x = self.location[0]
         self.location_y = self.location[1]
@@ -72,7 +72,8 @@ class Game:
 
         for y in range(GRIDHEIGHT):
             for x in range(GRIDWIDTH):
-                display_surface.blit(data.TEXTURE_GRASS01, (functions.pixelConversionH(x), functions.pixelConversionV(y)))
+                display_surface.blit(data.TEXTURE_GRASS01,
+                                     (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 
         pg.display.flip()

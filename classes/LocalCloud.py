@@ -42,7 +42,8 @@ class LocalCloud:
             file = open("data/userdata.txt", "r")
         file.close()
         self.getUserData()
-        Game.location = self.userdata['location']
+        return self.userdata['location']
+
 
     def updateUserData(self, location):
         self.userdata['location'] = location

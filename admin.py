@@ -1,4 +1,4 @@
-from classes import LocalCloud
+from classes import ExtraTools
 
-LocalCloud.LocalCloud().getAllData()
+ExtraTools.regenerateAllImages()
 
