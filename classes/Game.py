@@ -77,7 +77,7 @@ class Game:
                                      (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 #todo
-        pygame.draw.rect(screen, (252, 0, 0))
+#        pygame.draw.rect(screen, (252, 0, 0))
         pg.display.flip()
 
     def events(self):
@@ -108,6 +108,12 @@ class Game:
                 elif event.key == pg.K_d:
                     self.move_player(dx=1)
                     # second_checker([1, 0])
+                elif event.key == pg.K_PAGEDOWN:
+                    data.resizeGame(-4)
+                    self.draw()
+                elif event.key == pg.K_PAGEUP:
+                    data.resizeGame(4)
+                    self.draw()
 
     def show_start_screen(self):
         pass

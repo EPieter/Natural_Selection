@@ -21,7 +21,7 @@ def resizeImage(size, dir_name):
             str_img = str(image).split("/")[0] + "/" + str(size) + "px/" + str(image).split("/")[2]
         img = Image.open(image)
         if dir_name:
-            img = img.resize(int(size.split("px")[0]), int(size.split("px")[0]), Image.ANTIALIAS)
+            img = img.resize(int((size + "2").split("px")[0]), int((size + "2").split("px")[0]), Image.ANTIALIAS)
         else:
             img = img.resize((int(size), int(size)), Image.ANTIALIAS)
         img.save(str_img)

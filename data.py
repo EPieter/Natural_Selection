@@ -33,6 +33,7 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
+
 # game settings
 WIDTH = infoObject.current_w  # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = infoObject.current_h  # 16 * 48 or 32 * 24 or 64 * 12
@@ -50,6 +51,25 @@ MIDDLE_OF_THE_SCREEN = [WIDTH / 2, HEIGHT / 2]
 MIDDLE_OF_THE_SCREEN_IN_GRIDS = [math.ceil(GRIDWIDTH / 2) - 1, math.ceil(GRIDHEIGHT / 2) - 1]
 MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH = MIDDLE_OF_THE_SCREEN_IN_GRIDS[0] - 1
 MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT = MIDDLE_OF_THE_SCREEN_IN_GRIDS[1] - 1
+
+
+def resizeGame(size):
+    global GRIDWIDTH
+    global GRIDHEIGHT
+    global MIDDLE_OF_THE_SCREEN
+    global MIDDLE_OF_THE_SCREEN_IN_GRIDS
+    global MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH
+    global MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT
+    global TILESIZE
+    TILESIZE += size
+    GRIDWIDTH = math.ceil(WIDTH / TILESIZE)
+    GRIDHEIGHT = math.ceil(HEIGHT / TILESIZE)
+
+    MIDDLE_OF_THE_SCREEN = [WIDTH / 2, HEIGHT / 2]
+    MIDDLE_OF_THE_SCREEN_IN_GRIDS = [math.ceil(GRIDWIDTH / 2) - 1, math.ceil(GRIDHEIGHT / 2) - 1]
+    MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH = MIDDLE_OF_THE_SCREEN_IN_GRIDS[0] - 1
+    MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT = MIDDLE_OF_THE_SCREEN_IN_GRIDS[1] - 1
+
 
 img_dir = str(TILESIZE)+"px"
 TEXTURE_GRASS01 = pg.image.load("Sprites/" + img_dir + "/Clovers 00 seamless.jpg")
@@ -102,6 +122,7 @@ TEXTURE_SNOW01 = pg.image.load("Sprites/" + img_dir + "/Seamless snow 2 texture.
 TEXTURE_SNOW02 = pg.image.load("Sprites/" + img_dir + "/Seamless snow texture.jpg")
 TEXTURE_SNOW03 = pg.image.load("Sprites/" + img_dir + "/Seamless snow ground texture.jpg")
 TEXTURE_ICE01 = pg.image.load("Sprites/" + img_dir + "/Seamless tileable ice snow cracks ground texture.jpg")
+
 
 
 
