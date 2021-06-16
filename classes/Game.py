@@ -1,19 +1,19 @@
 import data
-from data import *
 from classes import Wall
 from classes import Player
 from classes import LocalCloud
 import functions
 import sys
 import os
-import pygame
+import pygame as pg
+import imp
 
 
 class Game:
     def __init__(self):
         pg.init()
-        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
-        pg.display.set_caption(TITLE)
+        self.screen = pg.display.set_mode((data.WIDTH, data.HEIGHT))
+        pg.display.set_caption(data.TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
@@ -36,7 +36,7 @@ class Game:
         # game loop - set self.playing = False to end the game
         self.playing = True
         while self.playing:
-            self.dt = self.clock.tick(FPS) / 1000
+            self.dt = self.clock.tick(data.FPS) / 1000
             self.events()
             self.update()
             self.draw()
@@ -49,8 +49,8 @@ class Game:
     def move_player(self, dx=0, dy=0):
         location_x = self.location_x
         location_y = self.location_y
-        dx = 0 if ((location_x == 0) and (dx == -1)) or ((location_x == (GRIDWIDTH - 1)) and (dx == 1)) else dx
-        dy = 0 if ((location_y == 0) and (dy == -1)) or ((location_y == (GRIDHEIGHT - 1)) and (dy == 1)) else dy
+        dx = 0 if ((location_x == 0) and (dx == -1)) or ((location_x == (data.GRIDWIDTH - 1)) and (dx == 1)) else dx
+        dy = 0 if ((location_y == 0) and (dy == -1)) or ((location_y == (data.GRIDHEIGHT - 1)) and (dy == 1)) else dy
         self.location_x = location_x + dx
         self.location_y = location_y + dy
         self.player.move(dx, dy)
@@ -60,20 +60,20 @@ class Game:
         self.all_sprites.update()
 
     def draw_grid(self):
-        for x in range(0, MAX_CALCULATED_AREA_WIDTH, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
-        for y in range(0, MAX_CALCULATED_AREA_HEIGHT, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
+        for x in range(0, data.MAX_CALCULATED_AREA_WIDTH, data.TILESIZE):
+            pg.draw.line(self.screen, data.LIGHTGREY, (x, 0), (x, data.HEIGHT))
+        for y in range(0, data.MAX_CALCULATED_AREA_HEIGHT, data.TILESIZE):
+            pg.draw.line(self.screen, data.LIGHTGREY, (0, y), (data.WIDTH, y))
 
 
     def draw(self):
-        self.screen.fill(BGCOLOR)
+        self.screen.fill(data.BGCOLOR)
         self.draw_grid()
-        display_surface = pygame.display.set_mode((infoObject.current_w, infoObject.current_h))
+        display_surface = pg.display.set_mode((data.infoObject.current_w, data.infoObject.current_h))
 
-        for y in range(GRIDHEIGHT):
-            for x in range(GRIDWIDTH):
-                display_surface.blit(data.TEXTURE_GRASS01,
+        for y in range(data.GRIDHEIGHT):
+            for x in range(data.GRIDWIDTH):
+                display_surface.blit(data.sprites.TEXTURE_GRASS01,
                                      (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 #todo
@@ -110,9 +110,12 @@ class Game:
                     # second_checker([1, 0])
                 elif event.key == pg.K_PAGEDOWN:
                     data.resizeGame(-4)
+                    #imp.reload(data)
+                    print(data.TILESIZE)
                     self.draw()
                 elif event.key == pg.K_PAGEUP:
                     data.resizeGame(4)
+                    #imp.reload(data)
                     self.draw()
 
     def show_start_screen(self):
