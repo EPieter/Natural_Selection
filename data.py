@@ -1,6 +1,5 @@
 import pygame as pg
 import math
-import importlib
 from resources import sprites
 
 # initializes pg functions
@@ -45,7 +44,7 @@ FPS = 60
 TITLE = "Natural Selection"
 BGCOLOR = DARKGREY
 
-TILESIZE = 48
+TILESIZE = 40
 GRIDWIDTH = math.ceil(WIDTH / TILESIZE)
 GRIDHEIGHT = math.ceil(HEIGHT / TILESIZE)
 
@@ -55,26 +54,6 @@ MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH = MIDDLE_OF_THE_SCREEN_IN_GRIDS[0] - 1
 MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT = MIDDLE_OF_THE_SCREEN_IN_GRIDS[1] - 1
 img_dir = str(TILESIZE)+"px"
 
-def resizeGame(size):
-    global GRIDWIDTH
-    global GRIDHEIGHT
-    global MIDDLE_OF_THE_SCREEN
-    global MIDDLE_OF_THE_SCREEN_IN_GRIDS
-    global MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH
-    global MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT
-    global TILESIZE
-    global img_dir
-    TILESIZE += size
-    GRIDWIDTH = math.ceil(WIDTH / TILESIZE)
-    GRIDHEIGHT = math.ceil(HEIGHT / TILESIZE)
-
-    MIDDLE_OF_THE_SCREEN = [WIDTH / 2, HEIGHT / 2]
-    MIDDLE_OF_THE_SCREEN_IN_GRIDS = [math.ceil(GRIDWIDTH / 2) - 1, math.ceil(GRIDHEIGHT / 2) - 1]
-    MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH = MIDDLE_OF_THE_SCREEN_IN_GRIDS[0] - 1
-    MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT = MIDDLE_OF_THE_SCREEN_IN_GRIDS[1] - 1
-
-    importlib.reload(sprites)
-    sprites.img_dir = str(TILESIZE)+"px"
 
 
 

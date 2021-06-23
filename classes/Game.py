@@ -1,12 +1,9 @@
 import data
-from classes import Wall
 from classes import Player
 from classes import LocalCloud
 import functions
 import sys
-import os
 import pygame as pg
-import imp
 
 
 class Game:
@@ -29,8 +26,6 @@ class Game:
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.player = Player.Player(self, self.location_x, self.location_y)
-        for x in range(10, 20):
-            Wall.Wall(self, x, 5)
 
     def run(self):
         # game loop - set self.playing = False to end the game
@@ -65,7 +60,6 @@ class Game:
         for y in range(0, data.MAX_CALCULATED_AREA_HEIGHT, data.TILESIZE):
             pg.draw.line(self.screen, data.LIGHTGREY, (0, y), (data.WIDTH, y))
 
-
     def draw(self):
         self.screen.fill(data.BGCOLOR)
         self.draw_grid()
@@ -76,8 +70,8 @@ class Game:
                 display_surface.blit(data.sprites.TEXTURE_GRASS01,
                                      (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
-#todo
-#        pygame.draw.rect(screen, (252, 0, 0))
+        # todo
+        #        pygame.draw.rect(screen, (252, 0, 0))
         pg.display.flip()
 
     def events(self):
@@ -98,25 +92,12 @@ class Game:
                     self.move_player(dy=1)
                 elif event.key == pg.K_w:
                     self.move_player(dy=-1)
-                    # second_checker([0, 1])
                 elif event.key == pg.K_a:
                     self.move_player(dx=-1)
-                    # second_checker([-1, 0])
                 elif event.key == pg.K_s:
                     self.move_player(dy=1)
-                    # second_checker([0, -1])
                 elif event.key == pg.K_d:
                     self.move_player(dx=1)
-                    # second_checker([1, 0])
-                elif event.key == pg.K_PAGEDOWN:
-                    data.resizeGame(-4)
-                    #imp.reload(data)
-                    print(data.TILESIZE)
-                    self.draw()
-                elif event.key == pg.K_PAGEUP:
-                    data.resizeGame(4)
-                    #imp.reload(data)
-                    self.draw()
 
     def show_start_screen(self):
         pass

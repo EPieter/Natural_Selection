@@ -1,13 +1,6 @@
 import controllers
 import functions
-from classes import OnlineCloud as cloud
 from classes import Game
-from classes import LocalCloud
-from classes import Cloud
-
-# try connect with server
-Cloud.Cloud()
-
 
 # start the game
 #  controllers.start_game()

@@ -1,13 +1,13 @@
 import data
 import pygame as pg
-
+from resources import sprites
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.Surface((data.TILESIZE, data.TILESIZE))
+        self.image = pg.Surface((sprites.TILESIZE, sprites.TILESIZE))
         self.image.fill(data.YELLOW)
         self.rect = self.image.get_rect()
         self.x = x

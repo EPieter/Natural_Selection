@@ -1,8 +1,6 @@
 import os
-import sys
 import data
 import json
-from classes import Game
 
 
 class LocalCloud:
@@ -43,7 +41,6 @@ class LocalCloud:
         file.close()
         self.getUserData()
         return self.userdata['location']
-
 
     def updateUserData(self, location):
         self.userdata['location'] = location

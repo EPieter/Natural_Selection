@@ -1,8 +1,7 @@
 import pygame as pg
-import data
 
-
-img_dir = str(data.TILESIZE)+"px"
+TILESIZE = 36
+img_dir = str(TILESIZE)+"px"
 
 TEXTURE_GRASS01 = pg.image.load("Sprites/" + img_dir + "/Clovers 00 seamless.jpg")
 TEXTURE_GRASS02 = pg.image.load("Sprites/" + img_dir + "/Dry_patch_grass_ground_land_dirt_aerial_top_seamless_texture.jpg")
