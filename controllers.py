@@ -1,12 +1,8 @@
 import pygame as pg
-import os
-import sys
+
 import threading as thread
 import logging as log
-import time
-import requests as get
-import data
-import base64
+
 
 # initializes PyGame functions
 pg.init()
