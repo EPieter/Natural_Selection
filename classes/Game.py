@@ -97,8 +97,3 @@ class Game:
                 elif event.key == pg.K_d:
                     self.move_player(dx=1)
 
-    def show_start_screen(self):
-        pass
-
-    def show_go_screen(self):
-        pass
