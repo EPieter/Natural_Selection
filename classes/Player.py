@@ -2,6 +2,7 @@ import data
 import pygame as pg
 from resources import sprites
 
+
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites

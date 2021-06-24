@@ -4,12 +4,15 @@ from classes import LocalCloud
 import functions
 import sys
 import pygame as pg
+from classes import Menu
 
 
 class Game:
+    screen = pg.display.set_mode((data.WIDTH, data.HEIGHT))
+
     def __init__(self):
         pg.init()
-        self.screen = pg.display.set_mode((data.WIDTH, data.HEIGHT))
+
         pg.display.set_caption(data.TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(500, 100)
@@ -96,4 +99,8 @@ class Game:
                     self.move_player(dy=1)
                 elif event.key == pg.K_d:
                     self.move_player(dx=1)
+                elif event.key == pg.K_SPACE:
+                    self.show_menu()
 
+    def show_menu(self):
+        menu = Menu.Store(self)
