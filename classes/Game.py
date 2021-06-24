@@ -23,6 +23,7 @@ class Game:
         self.location_x = self.location[0]
         self.location_y = self.location[1]
         # self.location = get_location_from_server()
+        self.menu = None
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -101,6 +102,8 @@ class Game:
                     self.move_player(dx=1)
                 elif event.key == pg.K_SPACE:
                     self.show_menu()
+                elif event.key == pg.K_q:
+                    self.menu.die()
 
     def show_menu(self):
-        menu = Menu.Store(self)
+        self.menu = Menu.Store(self)

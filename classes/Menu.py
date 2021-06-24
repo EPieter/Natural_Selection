@@ -37,3 +37,6 @@ class Store(pg.sprite.Sprite):
 
     def addStoreItems(self):
         pass
+
+    def die(self):
+        self.kill()
