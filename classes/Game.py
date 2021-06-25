@@ -60,15 +60,9 @@ class Game:
         # update portion of the game loop
         self.all_sprites.update()
 
-    def draw_grid(self):
-        for x in range(0, data.MAX_CALCULATED_AREA_WIDTH, data.TILESIZE):
-            pg.draw.line(self.screen, data.LIGHTGREY, (x, 0), (x, data.HEIGHT))
-        for y in range(0, data.MAX_CALCULATED_AREA_HEIGHT, data.TILESIZE):
-            pg.draw.line(self.screen, data.LIGHTGREY, (0, y), (data.WIDTH, y))
-
     def draw(self):
         self.screen.fill(data.BGCOLOR)
-        self.draw_grid()
+
         display_surface = pg.display.set_mode((data.infoObject.current_w, data.infoObject.current_h))
 
         for y in range(data.GRIDHEIGHT):
