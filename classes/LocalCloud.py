@@ -10,13 +10,17 @@ class LocalCloud:
         self.buildings = []
         self.list_file_content = []
         self.standard_data = json.dumps({
-            'location': [data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH,
-                         data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT],
-            'level': 0,
-            'resources': {'wood': 50, 'stone': 20, },
+            'location': [data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT],
+            'level': 1,
+            'people': 15,
+            'money': 1000,
             'buildings': [
-
-            ]
+                [14, 8, 0],
+                [14, 9, 0],
+                [13, 8, 0],
+                [15, 8, 0],
+                [14, 7, 0],
+            ],
         })
         self.userdata = {
             'location': [0, 0],
@@ -39,11 +43,13 @@ class LocalCloud:
             file = open("data/userdata.txt", "r")
         file.close()
         self.getUserData()
-        return [self.userdata['location'], self.userdata['buildings']]
+        return self.userdata
 
-    def updateUserData(self, location, buildings):
-        self.userdata['location'] = location
-        self.userdata['buildings'] = buildings
+    def updateUserData(self, game):
+        self.userdata['location'] = [game.location_x, game.location_y]
+        self.userdata['buildings'] = game.buildings
+        self.userdata['money'] = game.money
+        self.userdata['people'] = game.people_in_the_city
         file = open("data/userdata.txt", "w")
         json_userdata = json.dumps(self.userdata)
         file.write(json_userdata)
