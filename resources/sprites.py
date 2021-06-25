@@ -54,3 +54,16 @@ TEXTURE_SNOW02 = pg.image.load("Sprites/" + img_dir + "/Seamless snow texture.jp
 TEXTURE_SNOW03 = pg.image.load("Sprites/" + img_dir + "/Seamless snow ground texture.jpg")
 TEXTURE_ICE01 = pg.image.load("Sprites/" + img_dir + "/Seamless tileable ice snow cracks ground texture.jpg")
 
+STORE_SMALL_HOUSE = pg.image.load("Sprites/72px/Small House.png")
+STORE_BIG_HOUSE = pg.image.load("Sprites/72px/Big House.png")
+STORE_NORMAL_HOUSE = pg.image.load("Sprites/72px/Medium House.png")
+
+menu_items = [
+    ["Small house", STORE_SMALL_HOUSE],
+    ["Big house", STORE_BIG_HOUSE],
+    ["Normal house", STORE_NORMAL_HOUSE],
+    # ["Supermarket", pg.image.load("Sprites/72px/.png")],
+    # ["Factory", pg.image.load("Sprites/72px/.png")],
+]
+
+

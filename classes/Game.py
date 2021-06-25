@@ -1,3 +1,4 @@
+import StoreSelector
 import data
 from classes import Player
 from classes import LocalCloud
@@ -85,7 +86,6 @@ class Game:
                 self.quit()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE and 1 in self.currentShortcuts:
-                    print(self.currentShortcuts)
                     self.quit()
                 elif event.key == pg.K_LEFT and 2 in self.currentShortcuts:
                     self.move_player(dx=-1)
@@ -95,13 +95,13 @@ class Game:
                     self.move_player(dy=-1)
                 elif event.key == pg.K_DOWN and 5 in self.currentShortcuts:
                     self.move_player(dy=1)
-                elif event.key == pg.K_w and 2 in self.currentShortcuts:
+                elif event.key == pg.K_a and 2 in self.currentShortcuts:
                     self.move_player(dy=-1)
-                elif event.key == pg.K_a and 3 in self.currentShortcuts:
+                elif event.key == pg.K_d and 3 in self.currentShortcuts:
                     self.move_player(dx=-1)
-                elif event.key == pg.K_s and 4 in self.currentShortcuts:
+                elif event.key == pg.K_w and 4 in self.currentShortcuts:
                     self.move_player(dy=1)
-                elif event.key == pg.K_d and 5 in self.currentShortcuts:
+                elif event.key == pg.K_s and 5 in self.currentShortcuts:
                     self.move_player(dx=1)
                 elif event.key == pg.K_SPACE and 6 in self.currentShortcuts:
                     self.show_menu()
@@ -114,11 +114,20 @@ class Game:
                         if self.shortCuts.alive():
                             self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8]
                             self.shortCuts.kill()
-                elif (event.key == (pg.K_LCTRL or pg.K_RCTRL)) and 8 in self.currentShortcuts:
+                elif event.key == pg.K_LCTRL and 8 in self.currentShortcuts:
                     self.shortCuts = Shortcuts.Shortcuts(self)
                     self.currentShortcuts = [1, 7]
 
+                elif ((event.key == pg.K_w) or (event.key == pg.K_UP)) and 9 in self.currentShortcuts:
+                    self.store.selector.move(dy=-1)
+
+                elif ((event.key == pg.K_s) or (event.key == pg.K_DOWN)) and 10 in self.currentShortcuts:
+                    self.store.selector.move(dy=1)
+
+                elif event.key == pg.K_SPACE and 11 in self.currentShortcuts:
+                    pass
+
     def show_menu(self):
         self.store = Store.Store(self)
-        self.currentShortcuts = [1, 7, 8]
+        self.currentShortcuts = [1, 7, 8, 9, 10, 11]
 
