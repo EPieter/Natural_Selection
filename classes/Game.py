@@ -1,5 +1,5 @@
-import GameBuildings
-import ResourcesBar
+from classes import GameBuildings
+from classes import ResourcesBar
 import data
 from classes import Player
 from classes import LocalCloud

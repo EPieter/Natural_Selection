@@ -10,7 +10,7 @@ Store needs to have the following items:
 
 import pygame as pg
 
-import StoreSelector
+from classes import StoreSelector
 import data
 from resources import sprites
 
