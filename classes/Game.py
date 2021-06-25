@@ -42,7 +42,6 @@ class Game:
         self.level = self.userdata['level']
         self.production = 0
         self.calculateProduction()
-        self.production *= self.people_in_the_city
         self.resources = ResourcesBar.ResourcesBar(self)
         self.createBuildings()
 
@@ -133,7 +132,7 @@ class Game:
                         self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y, GameBuildings.GameBuildings(self, self.location_x, self.location_y, self.store.selector.x_y)])
                         self.money -= sprites.menu_items[self.store.selector.x_y][2]
                         self.people_in_the_city += sprites.menu_items[self.store.selector.x_y][3]
-                        self.production += sprites.menu_items[self.store.selector.x_y][4]
+                        self.calculateProduction()
                         self.resources.kill()
                         self.resources = ResourcesBar.ResourcesBar(self)
 
@@ -142,7 +141,10 @@ class Game:
                         if i[0] == self.location_x:
                             if i[1] == self.location_y:
                                 i[3].kill()
+                                self.people_in_the_city -= sprites.menu_items[i[2]][3]
+                                self.money += sprites.menu_items[i[2]][2]
                                 self.buildings.remove(i)
+                                self.calculateProduction()
 
     def show_menu(self):
         run = True
@@ -178,5 +180,7 @@ class Game:
         self.resources = ResourcesBar.ResourcesBar(self)
 
     def calculateProduction(self):
+        self.production = 0
         for building in self.saved_buildings:
             self.production += sprites.menu_items[building[2]][4]
+        self.production *= self.people_in_the_city
