@@ -1,4 +1,3 @@
-import data
 import pygame as pg
 from resources import sprites
 
@@ -17,3 +16,4 @@ class GameBuildings(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = functions.pixelConversionH(x)
         self.rect.y = functions.pixelConversionV(y)
+
