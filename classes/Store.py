@@ -11,7 +11,6 @@ Store needs to have the following items:
 import pygame as pg
 
 import data
-from Game import Game
 
 
 class Store(pg.sprite.Sprite):
@@ -40,3 +39,6 @@ class Store(pg.sprite.Sprite):
 
     def die(self):
         self.kill()
+
+    def isActive(self):
+        return self.alive()

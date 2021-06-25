@@ -4,7 +4,8 @@ from classes import LocalCloud
 import functions
 import sys
 import pygame as pg
-from classes import Menu
+from classes import Store
+from classes import Shortcuts
 
 
 class Game:
@@ -23,7 +24,8 @@ class Game:
         self.location_x = self.location[0]
         self.location_y = self.location[1]
         # self.location = get_location_from_server()
-        self.menu = None
+        self.store = None
+        self.shortCuts = None
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -103,7 +105,12 @@ class Game:
                 elif event.key == pg.K_SPACE:
                     self.show_menu()
                 elif event.key == pg.K_q:
-                    self.menu.die()
+                    if self.store.alive():
+                        self.store.die()
+                    elif self.shortCuts.alive():
+                        self.shortCuts.kill()
+                elif event.key == pg.K_LCTRL or pg.K_RCTRL:
+                    self.shortCuts = Shortcuts.Shortcuts(self)
 
     def show_menu(self):
-        self.menu = Menu.Store(self)
+        self.store = Store.Store(self)
