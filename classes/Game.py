@@ -40,10 +40,9 @@ class Game:
         self.people_in_the_city = self.userdata['people']
         self.money = self.userdata['money']
         self.level = self.userdata['level']
-        self.production = 0
+        self.createBuildings()
         self.calculateProduction()
         self.resources = ResourcesBar.ResourcesBar(self)
-        self.createBuildings()
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -181,6 +180,6 @@ class Game:
 
     def calculateProduction(self):
         self.production = 0
-        for building in self.saved_buildings:
+        for building in self.buildings:
             self.production += sprites.menu_items[building[2]][4]
         self.production *= self.people_in_the_city
