@@ -29,7 +29,7 @@ class Store(pg.sprite.Sprite):
 
         for i in range(1):
             for j in range(3):
-                self.image.blit(sprites.menu_items[j][1], (10 + i * 72, 10 + j * 72, 76, 76))
+                self.image.blit(sprites.menu_items[j][1], (10 + i * 76, 10 + j * 76, 76, 76))
 
         self.space_between_options = 8
 

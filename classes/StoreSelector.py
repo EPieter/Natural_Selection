@@ -9,7 +9,7 @@ class StoreSelector(pg.sprite.Sprite):
         self.game = store
         self.image = pg.Surface((600, 76))
         self.image = self.image.convert_alpha()
-        self.image.fill((255, 0, 0, 50))
+        self.image.fill((100, 255, 100, 50))
         self.rect = self.image.get_rect()
         self.x = 0
         self.y = 0
@@ -24,4 +24,4 @@ class StoreSelector(pg.sprite.Sprite):
 
     def update(self):
         self.rect.x = data.MIDDLE_OF_THE_SCREEN[0] - 300
-        self.rect.y = self.y * 72 + data.MIDDLE_OF_THE_SCREEN[1] - 290
+        self.rect.y = self.y * 76 + data.MIDDLE_OF_THE_SCREEN[1] - 290
