@@ -91,8 +91,7 @@ class Game:
         self.display_surface.fill(data.WHITE)
         for y in range(data.GRID_HEIGHT):
             for x in range(data.GRID_WIDTH):
-                self.display_surface.blit(sprites.TEXTURE_GRASS01,
-                                          (functions.pixelConversionH(x), functions.pixelConversionV(y)))
+                self.display_surface.blit(sprites.TEXTURE_GRASS01, (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 
         pg.display.flip()
@@ -131,9 +130,7 @@ class Game:
                     self.close_menu()
                     if self.money >= sprites.menu_items[self.store.selector.x_y][2]:
 
-                        self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y,
-                                               GameBuildings.GameBuildings(self, self.location_x, self.location_y,
-                                                                           self.store.selector.x_y)])
+                        self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y, GameBuildings.GameBuildings(self, self.location_x, self.location_y, self.store.selector.x_y)])
                         self.money -= sprites.menu_items[self.store.selector.x_y][2]
                         self.people_in_the_city += sprites.menu_items[self.store.selector.x_y][3]
                         self.production += sprites.menu_items[self.store.selector.x_y][4]
@@ -172,8 +169,7 @@ class Game:
 
     def createBuildings(self):
         for buildings in self.saved_buildings:
-            self.buildings.append([buildings[0], buildings[1], buildings[2],
-                                   GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])
+            self.buildings.append([buildings[0], buildings[1], buildings[2], GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])
 
     def updateMoney(self):
         pg.time.wait(50)
