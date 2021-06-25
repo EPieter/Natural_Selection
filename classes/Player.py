@@ -19,5 +19,5 @@ class Player(pg.sprite.Sprite):
         self.y += dy
 
     def update(self):
-        self.rect.x = self.x * data.TILESIZE + data.BEGIN_GRID_X + 2
-        self.rect.y = self.y * data.TILESIZE + data.BEGIN_GRID_Y + 2
+        self.rect.x = self.x * data.TILE_SIZE + data.BEGIN_GRID_X + 2
+        self.rect.y = self.y * data.TILE_SIZE + data.BEGIN_GRID_Y + 2

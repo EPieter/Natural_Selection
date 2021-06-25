@@ -7,10 +7,10 @@ class Wall(pg.sprite.Sprite):
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.Surface((data.TILESIZE, data.TILESIZE))
+        self.image = pg.Surface((data.TILE_SIZE, data.TILE_SIZE))
         self.image.fill(data.GREEN)
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
-        self.rect.x = x * data.TILESIZE
-        self.rect.y = y * data.TILESIZE
+        self.rect.x = x * data.TILE_SIZE
+        self.rect.y = y * data.TILE_SIZE
