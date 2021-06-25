@@ -5,16 +5,7 @@ import math
 # initializes pg functions
 pg.init()
 
-# url for connection with cloud
-url = "http://nsgame.nl/"
-app_url = url + "app/"
-
-# from files.data.start_game.py
-zoom_level = 0  # range -10, 10
-location = [0, 0]  # range (-unlimited, +unlimited), (-unlimited, +unlimited)
-
 # fetches display size
-
 infoObject = pg.display.Info()
 
 # display size
@@ -45,7 +36,7 @@ BG_COLOR = DARKGREY
 
 TILE_SIZE = 40
 GRID_WIDTH = 31
-GRID_HEIGHT = 21
+GRID_HEIGHT = 19
 
 MIDDLE_OF_THE_SCREEN = [WIDTH / 2, HEIGHT / 2]
 MIDDLE_OF_THE_SCREEN_IN_GRIDS = [math.ceil(GRID_WIDTH / 2) - 1, math.ceil(GRID_HEIGHT / 2) - 1]
