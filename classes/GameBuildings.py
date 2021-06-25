@@ -17,3 +17,4 @@ class GameBuildings(pg.sprite.Sprite):
         self.rect.x = functions.pixelConversionH(x)
         self.rect.y = functions.pixelConversionV(y)
 
+
