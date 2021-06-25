@@ -27,6 +27,8 @@ class Game:
         self.store = None
         self.shortCuts = None
 
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8]
+
     def new(self):
         # initialize all variables and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
@@ -70,7 +72,11 @@ class Game:
                 display_surface.blit(data.sprites.TEXTURE_GRASS01,
                                      (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
+
         pg.display.flip()
+
+    def updateAvailableShortCuts(self, array_ids):
+        self.currentShortcuts = array_ids
 
     def events(self):
         # catch all events here
@@ -78,33 +84,41 @@ class Game:
             if event.type == pg.QUIT:
                 self.quit()
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
+                if event.key == pg.K_ESCAPE and 1 in self.currentShortcuts:
+                    print(self.currentShortcuts)
                     self.quit()
-                elif event.key == pg.K_LEFT:
+                elif event.key == pg.K_LEFT and 2 in self.currentShortcuts:
                     self.move_player(dx=-1)
-                elif event.key == pg.K_RIGHT:
+                elif event.key == pg.K_RIGHT and 3 in self.currentShortcuts:
                     self.move_player(dx=1)
-                elif event.key == pg.K_UP:
+                elif event.key == pg.K_UP and 4 in self.currentShortcuts:
                     self.move_player(dy=-1)
-                elif event.key == pg.K_DOWN:
+                elif event.key == pg.K_DOWN and 5 in self.currentShortcuts:
                     self.move_player(dy=1)
-                elif event.key == pg.K_w:
+                elif event.key == pg.K_w and 2 in self.currentShortcuts:
                     self.move_player(dy=-1)
-                elif event.key == pg.K_a:
+                elif event.key == pg.K_a and 3 in self.currentShortcuts:
                     self.move_player(dx=-1)
-                elif event.key == pg.K_s:
+                elif event.key == pg.K_s and 4 in self.currentShortcuts:
                     self.move_player(dy=1)
-                elif event.key == pg.K_d:
+                elif event.key == pg.K_d and 5 in self.currentShortcuts:
                     self.move_player(dx=1)
-                elif event.key == pg.K_SPACE:
+                elif event.key == pg.K_SPACE and 6 in self.currentShortcuts:
                     self.show_menu()
-                elif event.key == pg.K_q:
-                    if self.store.alive():
-                        self.store.die()
-                    elif self.shortCuts.alive():
-                        self.shortCuts.kill()
-                elif event.key == pg.K_LCTRL or pg.K_RCTRL:
+                elif event.key == pg.K_q and 7 in self.currentShortcuts:
+                    if self.store is not None:
+                        if self.store.alive():
+                            self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8]
+                            self.store.kill()
+                    if self.shortCuts is not None:
+                        if self.shortCuts.alive():
+                            self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8]
+                            self.shortCuts.kill()
+                elif (event.key == (pg.K_LCTRL or pg.K_RCTRL)) and 8 in self.currentShortcuts:
                     self.shortCuts = Shortcuts.Shortcuts(self)
+                    self.currentShortcuts = [1, 7]
 
     def show_menu(self):
         self.store = Store.Store(self)
+        self.currentShortcuts = [1, 7, 8]
+

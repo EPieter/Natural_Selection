@@ -9,8 +9,8 @@ Store needs to have the following items:
 """
 
 import pygame as pg
-
 import data
+from resources import sprites
 
 
 class Store(pg.sprite.Sprite):
@@ -23,22 +23,22 @@ class Store(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = data.MIDDLE_OF_THE_SCREEN[0] - 300
         self.rect.y = data.MIDDLE_OF_THE_SCREEN[1] - 300
-
-        self.menu = None
         self.menu_items = [
-            ["Small house", pg.image.load("Sprites/normal/Clovers 00 seamless.jpg")],
-            ["Big house", pg.image.load("Sprites/normal/Clovers 00 seamless.jpg")],
-            ["Normal house", pg.image.load("Sprites/normal/Clovers 00 seamless.jpg")],
-            ["Supermarket", pg.image.load("Sprites/normal/Clovers 00 seamless.jpg")],
-            ["Factory", pg.image.load("Sprites/normal/Clovers 00 seamless.jpg")],
+            ["Small house", pg.image.load("Sprites/72px/Small House.png")],
+            ["Big house", pg.image.load("Sprites/72px/Big House.png")],
+            ["Normal house", pg.image.load("Sprites/72px/Medium House.png")],
+            # ["Supermarket", pg.image.load("Sprites/72px/.png")],
+            # ["Factory", pg.image.load("Sprites/72px/.png")],
         ]
+
+        for i in range(3):
+            for j in range(1):
+                self.image.blit(self.menu_items[i][1], (10 + i * 72, 10 + j * 72, 76, 76))
+
         self.space_between_options = 8
 
     def addStoreItems(self):
         pass
-
-    def die(self):
-        self.kill()
 
     def isActive(self):
         return self.alive()
