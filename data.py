@@ -7,7 +7,7 @@ pg.init()
 
 # url for connection with cloud
 url = "http://nsgame.nl/"
-app_url = url+"app/"
+app_url = url + "app/"
 
 # from files.data.start_game.py
 zoom_level = 0  # range -10, 10
@@ -34,7 +34,6 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
-
 # game settings
 WIDTH = infoObject.current_w  # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = infoObject.current_h  # 16 * 48 or 32 * 24 or 64 * 12
@@ -45,18 +44,15 @@ TITLE = "Natural Selection"
 BGCOLOR = DARKGREY
 
 TILESIZE = 40
-GRIDWIDTH = math.ceil(WIDTH / TILESIZE)
-GRIDHEIGHT = math.ceil(HEIGHT / TILESIZE)
+GRIDWIDTH = 31
+GRIDHEIGHT = 21
 
 MIDDLE_OF_THE_SCREEN = [WIDTH / 2, HEIGHT / 2]
 MIDDLE_OF_THE_SCREEN_IN_GRIDS = [math.ceil(GRIDWIDTH / 2) - 1, math.ceil(GRIDHEIGHT / 2) - 1]
 MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH = MIDDLE_OF_THE_SCREEN_IN_GRIDS[0] - 1
 MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT = MIDDLE_OF_THE_SCREEN_IN_GRIDS[1] - 1
-img_dir = str(TILESIZE)+"px"
 
+BEGIN_GRID_X = (WIDTH - GRIDWIDTH * TILESIZE) / 2
+BEGIN_GRID_Y = (HEIGHT - GRIDHEIGHT * TILESIZE) / 2
 
-
-
-
-
-
+img_dir = str(TILESIZE) + "px"

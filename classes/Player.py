@@ -2,6 +2,7 @@ import data
 import pygame as pg
 from resources import sprites
 
+
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
@@ -18,5 +19,5 @@ class Player(pg.sprite.Sprite):
         self.y += dy
 
     def update(self):
-        self.rect.x = self.x * data.TILESIZE
-        self.rect.y = self.y * data.TILESIZE
+        self.rect.x = self.x * data.TILESIZE + data.BEGIN_GRID_X + 2
+        self.rect.y = self.y * data.TILESIZE + data.BEGIN_GRID_Y + 2
