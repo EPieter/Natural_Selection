@@ -1,5 +1,4 @@
 import GameBuildings
-import StoreSelector
 import data
 from classes import Player
 from classes import LocalCloud
@@ -16,22 +15,21 @@ class Game:
 
     def __init__(self):
         pg.init()
-
+        self.game_started = False
         pg.display.set_caption(data.TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
-        self.location = self.localCloud.getAllData()
+        self.userdata = self.localCloud.getAllData()
+        self.location = self.userdata[0]
         self.display_surface = None
-        # print(self.localCloud.getBuildingsData())
         self.location_x = self.location[0]
         self.location_y = self.location[1]
-        # self.location = get_location_from_server()
         self.store = None
         self.shortCuts = None
         self.buildings = []
-
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12]
+        self.saved_buildings = self.userdata[1]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13]
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -49,15 +47,21 @@ class Game:
             self.draw()
 
     def quit(self):
-        self.localCloud.updateUserData([self.location_x, self.location_y])
+        saveBuildings = []
+        for buildings in self.buildings:
+            cache = []
+            for items in range(3):
+                cache.append(buildings[items])
+            saveBuildings.append(cache)
+        self.localCloud.updateUserData([self.location_x, self.location_y], saveBuildings)
         pg.quit()
         sys.exit()
 
     def move_player(self, dx=0, dy=0):
         location_x = self.location_x
         location_y = self.location_y
-        dx = 0 if ((location_x == 0) and (dx == -1)) or ((location_x == (data.GRIDWIDTH - 1)) and (dx == 1)) else dx
-        dy = 0 if ((location_y == 0) and (dy == -1)) or ((location_y == (data.GRIDHEIGHT - 1)) and (dy == 1)) else dy
+        dx = 0 if ((location_x == 0) and (dx == -1)) or ((location_x == (data.GRID_WIDTH - 1)) and (dx == 1)) else dx
+        dy = 0 if ((location_y == 0) and (dy == -1)) or ((location_y == (data.GRID_HEIGHT - 1)) and (dy == 1)) else dy
         self.location_x = location_x + dx
         self.location_y = location_y + dy
         self.player.move(dx, dy)
@@ -67,20 +71,17 @@ class Game:
         self.all_sprites.update()
 
     def draw(self):
-        self.screen.fill(data.BGCOLOR)
+        self.screen.fill(data.BG_COLOR)
 
         self.display_surface = pg.display.set_mode((data.infoObject.current_w, data.infoObject.current_h))
 
-        for y in range(data.GRIDHEIGHT):
-            for x in range(data.GRIDWIDTH):
-                self.display_surface.blit(data.sprites.TEXTURE_GRASS01,
-                                     (functions.pixelConversionH(x), functions.pixelConversionV(y)))
+        for y in range(data.GRID_HEIGHT):
+            for x in range(data.GRID_WIDTH):
+                self.display_surface.blit(sprites.TEXTURE_GRASS01,
+                                          (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 
         pg.display.flip()
-
-    def updateAvailableShortCuts(self, array_ids):
-        self.currentShortcuts = array_ids
 
     def events(self):
         # catch all events here
@@ -122,22 +123,40 @@ class Game:
 
                 elif event.key == pg.K_SPACE and 11 in self.currentShortcuts:
                     self.close_menu()
-                    self.buildings.append(GameBuildings.GameBuildings(self, self.location_x, self.location_y, self.store.selector.x_y))
+                    self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y,
+                                           GameBuildings.GameBuildings(self, self.location_x, self.location_y,
+                                                                       self.store.selector.x_y)])
 
                 elif event.key == pg.K_o and 12 in self.currentShortcuts:
                     pass
+
+                elif event.key == pg.K_DELETE and 13 in self.currentShortcuts:
+                    for i in self.buildings:
+                        if i[0] == self.location_x:
+                            if i[1] == self.location_y:
+                                i[3].kill()
+
+                elif event.key == pg.K_l and not self.game_started:
+                    self.createBuildings()
+                    self.game_started = True
 
     def show_menu(self):
         self.store = Store.Store(self)
         self.currentShortcuts = [1, 7, 8, 9, 10, 11]
 
     def close_menu(self):
+        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13]
         if self.store is not None:
             if self.store.alive():
-                self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12]
+                self.currentShortcuts = shortcuts
                 self.store.selector.kill()
                 self.store.kill()
         if self.shortCuts is not None:
             if self.shortCuts.alive():
-                self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12]
+                self.currentShortcuts = shortcuts
                 self.shortCuts.kill()
+
+    def createBuildings(self):
+        for buildings in self.saved_buildings:
+            self.buildings.append([buildings[0], buildings[1], buildings[2],
+                                   GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])

@@ -15,8 +15,7 @@ class LocalCloud:
             'level': 0,
             'resources': {'wood': 50, 'stone': 20, },
             'buildings': [
-                [0, 1, [0, 0]],  # city hall
-                [1, 1, [0, 1]],  # way
+
             ]
         })
         self.userdata = {
@@ -40,10 +39,11 @@ class LocalCloud:
             file = open("data/userdata.txt", "r")
         file.close()
         self.getUserData()
-        return self.userdata['location']
+        return [self.userdata['location'], self.userdata['buildings']]
 
-    def updateUserData(self, location):
+    def updateUserData(self, location, buildings):
         self.userdata['location'] = location
+        self.userdata['buildings'] = buildings
         file = open("data/userdata.txt", "w")
         json_userdata = json.dumps(self.userdata)
         file.write(json_userdata)
