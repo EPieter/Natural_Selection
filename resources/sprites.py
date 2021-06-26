@@ -75,11 +75,11 @@ STORE_SMALL_FACTORY = pg.image.load("Sprites/72px/Small Factory.png")
 STORE_BIG_FACTORY = pg.image.load("Sprites/72px/Big Factory.png")
 
 menu_items = [
-    ["Small house", STORE_SMALL_HOUSE, 50, 3, 0],
-    ["Normal house", STORE_NORMAL_HOUSE, 100, 7, 0],
-    ["Big house", STORE_BIG_HOUSE, 200, 15, 0],
-    ["Small Factory", STORE_SMALL_FACTORY, 500, 0, 0.05],
-    ["Big Factory", STORE_BIG_FACTORY, 1200, 0, 1],
+    ["Small house", STORE_SMALL_HOUSE, 50, 3, 0, 0],
+    ["Normal house", STORE_NORMAL_HOUSE, 100, 7, 0, 0],
+    ["Big house", STORE_BIG_HOUSE, 200, 15, 0, 0],
+    ["Small Factory", STORE_SMALL_FACTORY, 500, 0, 0.05, 20],
+    ["Big Factory", STORE_BIG_FACTORY, 1200, 0, 1, 100],
 ]
 
 

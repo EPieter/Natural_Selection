@@ -188,6 +188,15 @@ class Game:
 
     def calculateProduction(self):
         self.production = 0
-        for building in self.buildings:
-            self.production += sprites.menu_items[building[2]][4]
-        self.production *= self.people_in_the_city
+        people = self.people_in_the_city
+        for factory in self.buildings:
+            limit = sprites.menu_items[factory[2]][5]
+            production = sprites.menu_items[factory[2]][4]
+            if people - limit > 0:
+                people -= limit
+                self.production += limit * production
+            else:
+                self.production += people * production
+                people = 0
+
+
