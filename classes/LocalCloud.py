@@ -50,7 +50,7 @@ class LocalCloud:
         return self.userdata
 
     def updateUserData(self, game):
-        self.userdata = json.loads(self.userdata)
+        self.userdata = json.loads(self.userdata) if type(self.userdata) == "str" else self.userdata
 
         self.userdata['location'] = [game.location_x, game.location_y]
         self.userdata['buildings'] = game.buildings

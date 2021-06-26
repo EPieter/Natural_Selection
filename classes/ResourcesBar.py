@@ -17,7 +17,7 @@ class ResourcesBar(pg.sprite.Sprite):
         self.money = game.money
         self.people = game.people_in_the_city
         self.production = game.production
-        font = pg.font.Font('resources/OpenSans-SemiBold.ttf', 24)
+        font = pg.font.Font('Sprites/OpenSans-SemiBold.ttf', 24)
         text = font.render('Production: ' + str(format(self.production, ".2f")), True, (0, 0, 0))
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx - 400
