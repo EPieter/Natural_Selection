@@ -11,6 +11,7 @@ STORE_NORMAL_HOUSE_36 = pg.image.load("Sprites/36px/Medium House.png")
 STORE_SMALL_FACTORY_36 = pg.image.load("Sprites/36px/Small Factory.png")
 STORE_BIG_FACTORY_36 = pg.image.load("Sprites/36px/Big Factory.png")
 STORE_DIAMOND_36 = pg.image.load("Sprites/36px/Diamond.png")
+STORE_BITCOIN_36 = pg.image.load("Sprites/36px/Bitcoin.png")
 
 menu_items_36 = [
     ["Small house", STORE_SMALL_HOUSE_36, 50],
@@ -18,6 +19,7 @@ menu_items_36 = [
     ["Big house", STORE_BIG_HOUSE_36, 200],
     ["Small Factory", STORE_SMALL_FACTORY_36],
     ["Big Factory", STORE_BIG_FACTORY_36],
+    ["Bitcoin", STORE_BITCOIN_36],
     ["Diamond", STORE_DIAMOND_36],
 ]
 
@@ -26,6 +28,7 @@ STORE_BIG_HOUSE = pg.image.load("Sprites/72px/Big House.png")
 STORE_NORMAL_HOUSE = pg.image.load("Sprites/72px/Medium House.png")
 STORE_SMALL_FACTORY = pg.image.load("Sprites/72px/Small Factory.png")
 STORE_BIG_FACTORY = pg.image.load("Sprites/72px/Big Factory.png")
+STORE_BITCOIN = pg.image.load("Sprites/72px/Bitcoin.png")
 STORE_DIAMOND = pg.image.load("Sprites/72px/Diamond.png")
 
 menu_items = [
@@ -34,7 +37,8 @@ menu_items = [
     ["Big house", STORE_BIG_HOUSE, 200, 15, 0, 0],
     ["Small Factory", STORE_SMALL_FACTORY, 500, 0, 0.05, 20],
     ["Big Factory", STORE_BIG_FACTORY, 1200, 0, 1, 100],
-    ["Diamond", STORE_DIAMOND, 100000, 0, 0, 0],
+    ["Bitcoin", STORE_BITCOIN, 50000, 0, 0, 0],
+    ["Diamond", STORE_DIAMOND, 1000000, 0, 0, 0],
 ]
 
 

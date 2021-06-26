@@ -9,6 +9,7 @@ import pygame as pg
 from classes import Store
 from classes import Shortcuts
 from resources import sprites
+import json
 
 
 class Game:
@@ -20,9 +21,11 @@ class Game:
         pg.init()
         pg.display.set_caption(data.TITLE)
         self.clock = pg.time.Clock()
+        pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
         pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
+        self.userdata = json.loads(self.userdata)
         self.location = self.userdata['location']
         self.display_surface = None
         self.location_x = self.location[0]
@@ -88,7 +91,8 @@ class Game:
         self.display_surface.fill(data.WHITE)
         for y in range(data.GRID_HEIGHT):
             for x in range(data.GRID_WIDTH):
-                self.display_surface.blit(sprites.TEXTURE_GRASS01, (functions.pixelConversionH(x), functions.pixelConversionV(y)))
+                self.display_surface.blit(sprites.TEXTURE_GRASS01,
+                                          (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 
         pg.display.flip()
@@ -125,8 +129,9 @@ class Game:
 
                 elif event.key == pg.K_RETURN and 11 in self.currentShortcuts:
                     if self.money >= sprites.menu_items[self.store.selector.x_y][2]:
-
-                        self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y, GameBuildings.GameBuildings(self, self.location_x, self.location_y, self.store.selector.x_y)])
+                        self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y,
+                                               GameBuildings.GameBuildings(self, self.location_x, self.location_y,
+                                                                           self.store.selector.x_y)])
                         self.money -= sprites.menu_items[self.store.selector.x_y][2]
                         self.people_in_the_city += sprites.menu_items[self.store.selector.x_y][3]
                         self.calculateProduction()
@@ -177,7 +182,8 @@ class Game:
 
     def createBuildings(self):
         for buildings in self.saved_buildings:
-            self.buildings.append([buildings[0], buildings[1], buildings[2], GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])
+            self.buildings.append([buildings[0], buildings[1], buildings[2],
+                                   GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])
 
     def updateMoney(self):
         pg.time.wait(50)
@@ -186,9 +192,11 @@ class Game:
         self.resources = ResourcesBar.ResourcesBar(self)
 
     def calculateProduction(self):
+        buildings = self.buildings
+        buildings.sort(key=lambda x: x[2], reverse=True)
         self.production = 0
         people = self.people_in_the_city
-        for factory in self.buildings:
+        for factory in buildings:
             limit = sprites.menu_items[factory[2]][5]
             production = sprites.menu_items[factory[2]][4]
             if people - limit > 0:
@@ -197,5 +205,3 @@ class Game:
             else:
                 self.production += people * production
                 people = 0
-
-
