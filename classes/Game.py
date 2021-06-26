@@ -25,7 +25,7 @@ class Game:
         pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
-        self.userdata = json.loads(self.userdata) if type(self.userdata) == "str" else self.userdata
+        pg.time.wait(100)
         self.location = self.userdata['location']
         self.display_surface = None
         self.location_x = self.location[0]

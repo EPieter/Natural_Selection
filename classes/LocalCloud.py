@@ -33,16 +33,16 @@ class LocalCloud:
                 file = open("data/userdata.jpg", "rb")
             except IOError:
                 file = open("data/userdata.jpg", "wb")
-                json_userdata = json.dumps(self.standard_data)
-                encoded_userdata = base64.b64encode(json_userdata.encode("utf-8"))
+                json_userdata = self.standard_data
+                encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
                 file.write(encoded_userdata)
                 file = open("data/userdata.jpg", "rb")
         else:
             os.mkdir('data')
             os.system("attrib +h data")
             file = open('data/userdata.jpg', "wb")
-            json_userdata = json.dumps(self.standard_data)
-            encoded_userdata = base64.b64encode(json_userdata.encode("utf-8"))
+            json_userdata = self.standard_data
+            encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
             file.write(encoded_userdata)
             file = open("data/userdata.jpg", "rb")
         file.close()
@@ -50,20 +50,18 @@ class LocalCloud:
         return self.userdata
 
     def updateUserData(self, game):
-        self.userdata = json.loads(self.userdata) if type(self.userdata) == "str" else self.userdata
-
         self.userdata['location'] = [game.location_x, game.location_y]
         self.userdata['buildings'] = game.buildings
         self.userdata['money'] = game.money
         self.userdata['people'] = game.people_in_the_city
         file = open("data/userdata.jpg", "wb")
         json_userdata = json.dumps(self.userdata)
-        encoded_userdata = base64.b64encode(json_userdata.encode("utf-8"))
+        encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
         file.write(encoded_userdata)
 
     def getUserData(self):
         file = open("data/userdata.jpg", "rb")
         file_content = file.read()
-        decoded_userdata = base64.b64decode(file_content)
-        file_content_decoded = json.loads(decoded_userdata)
-        self.userdata = file_content_decoded
+        decoded_userdata = base64.urlsafe_b64decode(file_content)
+        file_content = json.loads(decoded_userdata)
+        self.userdata = file_content
