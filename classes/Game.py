@@ -141,7 +141,7 @@ class Game:
                             if i[1] == self.location_y:
                                 i[3].kill()
                                 self.people_in_the_city -= sprites.menu_items[i[2]][3]
-                                self.money += sprites.menu_items[i[2]][2]
+                                self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
                                 self.calculateProduction()
 
@@ -160,13 +160,21 @@ class Game:
         shortcuts = [1, 2, 3, 4, 5, 6, 8, 12]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
-                self.currentShortcuts = shortcuts
+                if self.store is not None:
+                    if self.store.alive():
+                        self.currentShortcuts = [1, 7, 8, 9, 10, 11]
+                    else:
+                        self.currentShortcuts = shortcuts
+                else:
+                    self.currentShortcuts = shortcuts
                 self.shortCuts.kill()
+                self.shortCuts = None
         elif self.store is not None:
             if self.store.alive():
                 self.currentShortcuts = shortcuts
                 self.store.selector.kill()
                 self.store.kill()
+                self.store = None
 
     def createBuildings(self):
         for buildings in self.saved_buildings:
