@@ -35,10 +35,10 @@ menu_items = [
     ["Small house", STORE_SMALL_HOUSE, 50, 3, 0, 0],
     ["Normal house", STORE_NORMAL_HOUSE, 100, 7, 0, 0],
     ["Big house", STORE_BIG_HOUSE, 200, 15, 0, 0],
-    ["Small Factory", STORE_SMALL_FACTORY, 500, 0, 0.05, 20],
-    ["Big Factory", STORE_BIG_FACTORY, 1200, 0, 1, 100],
-    ["Bitcoin", STORE_BITCOIN, 50000, 0, 0, 0],
-    ["Diamond", STORE_DIAMOND, 1000000, 0, 0, 0],
+    ["Small Factory", STORE_SMALL_FACTORY, 300, 0, 0.08, 20],
+    ["Big Factory", STORE_BIG_FACTORY, 1200, 0, 0.7, 100],
+    ["Bitcoin", STORE_BITCOIN, 80000, 0, 0, 0],
+    ["Diamond", STORE_DIAMOND, 1500000, 0, 0, 0],
 ]
 
 

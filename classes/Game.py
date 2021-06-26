@@ -9,7 +9,6 @@ import pygame as pg
 from classes import Store
 from classes import Shortcuts
 from resources import sprites
-import json
 
 
 class Game:
@@ -149,6 +148,22 @@ class Game:
                                 self.buildings.remove(i)
                                 self.calculateProduction()
 
+                all_keys = pg.key.get_pressed()
+                if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F1]:
+                    self.createBuilding(0)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F2]:
+                    self.createBuilding(1)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F3]:
+                    self.createBuilding(2)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F4]:
+                    self.createBuilding(3)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F5]:
+                    self.createBuilding(4)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F6]:
+                    self.createBuilding(5)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F7]:
+                    self.createBuilding(6)
+
     def show_menu(self):
         run = True
         if self.buildings:
@@ -205,3 +220,18 @@ class Game:
             else:
                 self.production += people * production
                 people = 0
+
+    def createBuilding(self, key):
+        if self.money >= sprites.menu_items[key][2]:
+            run = True
+            if self.buildings:
+                for building in self.buildings:
+                    if (building[0] == self.location_x) and (building[1] == self.location_y):
+                        run = False
+            if run:
+                self.buildings.append([self.location_x, self.location_y, key,
+                                       GameBuildings.GameBuildings(self, self.location_x, self.location_y,
+                                                                   key)])
+                self.money -= sprites.menu_items[key][2]
+                self.people_in_the_city += sprites.menu_items[key][3]
+                self.calculateProduction()

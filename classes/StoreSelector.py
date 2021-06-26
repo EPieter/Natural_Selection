@@ -24,4 +24,4 @@ class StoreSelector(pg.sprite.Sprite):
 
     def update(self):
         self.rect.x = data.MIDDLE_OF_THE_SCREEN[0] - 300
-        self.rect.y = self.y * 76 + data.MIDDLE_OF_THE_SCREEN[1] - 260
+        self.rect.y = self.y * 76 + data.MIDDLE_OF_THE_SCREEN[1] - 304
