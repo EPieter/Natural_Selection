@@ -1,7 +1,6 @@
 import pygame as pg
 
 import data
-import math
 
 
 class ResourcesBar(pg.sprite.Sprite):
@@ -22,22 +21,22 @@ class ResourcesBar(pg.sprite.Sprite):
         font = pg.font.Font('resources/OpenSans-SemiBold.ttf', 24)
         text = font.render('Production: ' + str(format(self.production, ".2f")), True, (0, 0, 0))
         text_rect = text.get_rect()
-        text_rect.centerx = self.image.get_rect().centerx - 250
+        text_rect.centerx = self.image.get_rect().centerx - 400
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
         text = font.render('Money: € ' + str(format(self.money, ".2f")), True, (0, 0, 0))
         text_rect = text.get_rect()
-        text_rect.centerx = self.image.get_rect().centerx
+        text_rect.centerx = self.image.get_rect().centerx - 150
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
         text = font.render('People: ' + str(self.people), True, (0, 0, 0))
         text_rect = text.get_rect()
-        text_rect.centerx = self.image.get_rect().centerx + 250
+        text_rect.centerx = self.image.get_rect().centerx + 100
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
         text = font.render('Press Ctrl for all shortcuts', True, (0, 0, 0))
         text_rect = text.get_rect()
-        text_rect.centerx = self.image.get_rect().centerx - 600
+        text_rect.centerx = self.image.get_rect().centerx + 400
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
 

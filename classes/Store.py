@@ -28,7 +28,7 @@ class Store(pg.sprite.Sprite):
         self.selector = StoreSelector.StoreSelector(game)
         font = pg.font.Font('resources/OpenSans-SemiBold.ttf', 24)
         for i in range(1):
-            for j in range(5):
+            for j in range(6):
                 self.image.blit(sprites.menu_items[j][1], (10 + i * 76, 10 + j * 76, 76, 76))
                 text = font.render('€ ' + str(sprites.menu_items[j][2]), True, (255, 255, 255))
                 text_rect = (10 + 2 * 76, 34 + j * 76, 500, 24)

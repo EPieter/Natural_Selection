@@ -18,7 +18,7 @@ class StoreSelector(pg.sprite.Sprite):
 
     def move(self, dy=0):
         if self.x_y + dy >= 0:
-            if self.x_y + dy <= 4:
+            if self.x_y + dy <= 5:
                 self.y += dy
                 self.x_y += dy
 
