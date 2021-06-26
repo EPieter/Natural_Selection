@@ -39,7 +39,6 @@ class Game:
         self.dt = self.clock.tick(data.FPS) / 1000
         self.people_in_the_city = self.userdata['people']
         self.money = self.userdata['money']
-        self.level = self.userdata['level']
         self.createBuildings()
         self.calculateProduction()
         self.resources = ResourcesBar.ResourcesBar(self)

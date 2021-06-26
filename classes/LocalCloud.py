@@ -11,7 +11,6 @@ class LocalCloud:
         self.list_file_content = []
         self.standard_data = json.dumps({
             'location': [data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT],
-            'level': 1,
             'people': 15,
             'money': 1000,
             'buildings': [
