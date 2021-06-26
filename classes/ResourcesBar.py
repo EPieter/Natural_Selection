@@ -20,12 +20,12 @@ class ResourcesBar(pg.sprite.Sprite):
         self.level = game.level
         self.production = game.production
         font = pg.font.Font('resources/OpenSans-SemiBold.ttf', 24)
-        text = font.render('Production: ' + str((math.ceil(self.production*100))/100), True, (0, 0, 0))
+        text = font.render('Production: ' + str(format(self.production, ".2f")), True, (0, 0, 0))
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx - 250
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
-        text = font.render('Money: € ' + str(math.ceil(self.money)), True, (0, 0, 0))
+        text = font.render('Money: € ' + str(format(self.money, ".2f")), True, (0, 0, 0))
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx
         text_rect.centery = self.image.get_rect().centery

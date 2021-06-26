@@ -125,7 +125,6 @@ class Game:
                     self.store.selector.move(dy=1)
 
                 elif event.key == pg.K_RETURN and 11 in self.currentShortcuts:
-                    self.close_menu()
                     if self.money >= sprites.menu_items[self.store.selector.x_y][2]:
 
                         self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y, GameBuildings.GameBuildings(self, self.location_x, self.location_y, self.store.selector.x_y)])
@@ -134,6 +133,7 @@ class Game:
                         self.calculateProduction()
                         self.resources.kill()
                         self.resources = ResourcesBar.ResourcesBar(self)
+                    self.close_menu()
 
                 elif event.key == pg.K_DELETE and 12 in self.currentShortcuts:
                     for i in self.buildings:
@@ -182,7 +182,7 @@ class Game:
 
     def updateMoney(self):
         pg.time.wait(50)
-        self.money += self.production * 0.05
+        self.money += self.production * 0.07
         self.resources.kill()
         self.resources = ResourcesBar.ResourcesBar(self)
 
