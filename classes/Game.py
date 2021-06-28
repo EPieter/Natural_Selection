@@ -33,7 +33,7 @@ class Game:
         self.shortCuts = None
         self.buildings = []
         self.saved_buildings = self.userdata['buildings']
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13]
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.player = Player.Player(self, self.location_x, self.location_y)
@@ -150,22 +150,22 @@ class Game:
                                 self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
                                 self.calculateProduction()
-
-                all_keys = pg.key.get_pressed()
-                if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F1]:
-                    self.createBuilding(0)
-                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F2]:
-                    self.createBuilding(1)
-                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F3]:
-                    self.createBuilding(2)
-                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F4]:
-                    self.createBuilding(3)
-                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F5]:
-                    self.createBuilding(4)
-                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F6]:
-                    self.createBuilding(5)
-                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F7]:
-                    self.createBuilding(6)
+                if 13 in self.currentShortcuts:
+                    all_keys = pg.key.get_pressed()
+                    if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F1]:
+                        self.createBuilding(0)
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F2]:
+                        self.createBuilding(1)
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F3]:
+                        self.createBuilding(2)
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F4]:
+                        self.createBuilding(3)
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F5]:
+                        self.createBuilding(4)
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F6]:
+                        self.createBuilding(5)
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F7]:
+                        self.createBuilding(6)
 
     def show_menu(self):
         run = True
@@ -179,7 +179,7 @@ class Game:
             self.currentShortcuts = [1, 7, 8, 9, 10, 11]
 
     def close_menu(self):
-        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12]
+        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
                 if self.store is not None:

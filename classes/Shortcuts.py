@@ -15,6 +15,7 @@ availableShortcuts = [
     ["D or ArrowDown", "Select below"],
     ["Return", "Purchase and place building"],
     ["Delete", "Delete Building"],
+    ["Shift + F1-7", "Shortcut for placing buildings"],
 ]
 
 
