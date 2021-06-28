@@ -1,5 +1,5 @@
-import GameBuildings
-import ResourcesBar
+from classes import GameBuildings
+from classes import ResourcesBar
 import data
 from classes import Player
 from classes import LocalCloud
@@ -9,6 +9,7 @@ import pygame as pg
 from classes import Store
 from classes import Shortcuts
 from resources import sprites
+import time
 
 
 class Game:
@@ -20,6 +21,7 @@ class Game:
         pg.init()
         pg.display.set_caption(data.TITLE)
         self.clock = pg.time.Clock()
+        pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
         pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
@@ -39,12 +41,12 @@ class Game:
         self.dt = self.clock.tick(data.FPS) / 1000
         self.people_in_the_city = self.userdata['people']
         self.money = self.userdata['money']
-        self.level = self.userdata['level']
-        self.production = 0
-        self.calculateProduction()
-        self.production *= self.people_in_the_city
-        self.resources = ResourcesBar.ResourcesBar(self)
         self.createBuildings()
+        self.calculateProduction()
+        self.resources = ResourcesBar.ResourcesBar(self)
+        self.time1 = time.time()
+        self.time2 = None
+        self.time_switch = True
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -91,7 +93,8 @@ class Game:
         self.display_surface.fill(data.WHITE)
         for y in range(data.GRID_HEIGHT):
             for x in range(data.GRID_WIDTH):
-                self.display_surface.blit(sprites.TEXTURE_GRASS01, (functions.pixelConversionH(x), functions.pixelConversionV(y)))
+                self.display_surface.blit(sprites.TEXTURE_GRASS01,
+                                          (functions.pixelConversionH(x), functions.pixelConversionV(y)))
         self.all_sprites.draw(self.screen)
 
         pg.display.flip()
@@ -127,22 +130,42 @@ class Game:
                     self.store.selector.move(dy=1)
 
                 elif event.key == pg.K_RETURN and 11 in self.currentShortcuts:
-                    self.close_menu()
                     if self.money >= sprites.menu_items[self.store.selector.x_y][2]:
-
-                        self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y, GameBuildings.GameBuildings(self, self.location_x, self.location_y, self.store.selector.x_y)])
+                        self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y,
+                                               GameBuildings.GameBuildings(self, self.location_x, self.location_y,
+                                                                           self.store.selector.x_y)])
                         self.money -= sprites.menu_items[self.store.selector.x_y][2]
                         self.people_in_the_city += sprites.menu_items[self.store.selector.x_y][3]
-                        self.production += sprites.menu_items[self.store.selector.x_y][4]
+                        self.calculateProduction()
                         self.resources.kill()
                         self.resources = ResourcesBar.ResourcesBar(self)
+                    self.close_menu()
 
                 elif event.key == pg.K_DELETE and 12 in self.currentShortcuts:
                     for i in self.buildings:
                         if i[0] == self.location_x:
                             if i[1] == self.location_y:
                                 i[3].kill()
+                                self.people_in_the_city -= sprites.menu_items[i[2]][3]
+                                self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
+                                self.calculateProduction()
+
+                all_keys = pg.key.get_pressed()
+                if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F1]:
+                    self.createBuilding(0)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F2]:
+                    self.createBuilding(1)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F3]:
+                    self.createBuilding(2)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F4]:
+                    self.createBuilding(3)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F5]:
+                    self.createBuilding(4)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F6]:
+                    self.createBuilding(5)
+                elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F7]:
+                    self.createBuilding(6)
 
     def show_menu(self):
         run = True
@@ -159,24 +182,67 @@ class Game:
         shortcuts = [1, 2, 3, 4, 5, 6, 8, 12]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
-                self.currentShortcuts = shortcuts
+                if self.store is not None:
+                    if self.store.alive():
+                        self.currentShortcuts = [1, 7, 8, 9, 10, 11]
+                    else:
+                        self.currentShortcuts = shortcuts
+                else:
+                    self.currentShortcuts = shortcuts
                 self.shortCuts.kill()
+                self.shortCuts = None
         elif self.store is not None:
             if self.store.alive():
                 self.currentShortcuts = shortcuts
                 self.store.selector.kill()
                 self.store.kill()
+                self.store = None
 
     def createBuildings(self):
         for buildings in self.saved_buildings:
-            self.buildings.append([buildings[0], buildings[1], buildings[2], GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])
+            self.buildings.append([buildings[0], buildings[1], buildings[2],
+                                   GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])
 
     def updateMoney(self):
         pg.time.wait(50)
-        self.money += self.production * 0.05
+        if self.time_switch:
+            self.time2 = time.time()
+            time_diff = abs(self.time2 - self.time1)
+            self.time_switch = False
+        else:
+            self.time1 = time.time()
+            time_diff = abs(self.time1 - self.time2)
+            self.time_switch = True
+        self.money += self.production * time_diff
         self.resources.kill()
         self.resources = ResourcesBar.ResourcesBar(self)
 
     def calculateProduction(self):
-        for building in self.saved_buildings:
-            self.production += sprites.menu_items[building[2]][4]
+        buildings = self.buildings
+        buildings.sort(key=lambda x: x[2], reverse=True)
+        self.production = 0
+        people = self.people_in_the_city
+        for factory in buildings:
+            limit = sprites.menu_items[factory[2]][5]
+            production = sprites.menu_items[factory[2]][4]
+            if people - limit > 0:
+                people -= limit
+                self.production += limit * production
+            else:
+                self.production += people * production
+                people = 0
+
+    def createBuilding(self, key):
+        if self.money >= sprites.menu_items[key][2]:
+            run = True
+            if self.buildings:
+                for building in self.buildings:
+                    if (building[0] == self.location_x) and (building[1] == self.location_y):
+                        run = False
+            if run:
+                self.buildings.append([self.location_x, self.location_y, key,
+                                       GameBuildings.GameBuildings(self, self.location_x, self.location_y,
+                                                                   key)])
+                self.money -= sprites.menu_items[key][2]
+                self.people_in_the_city += sprites.menu_items[key][3]
+                self.calculateProduction()

@@ -1,6 +1,7 @@
 import os
 import data
 import json
+import base64
 
 
 class LocalCloud:
@@ -11,7 +12,6 @@ class LocalCloud:
         self.list_file_content = []
         self.standard_data = json.dumps({
             'location': [data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_WIDTH, data.MIDDLE_OF_THE_SCREEN_IN_GRIDS_HEIGHT],
-            'level': 1,
             'people': 15,
             'money': 1000,
             'buildings': [
@@ -30,17 +30,21 @@ class LocalCloud:
         dir_set = os.path.isdir("data")
         if dir_set:
             try:
-                file = open("data/userdata.txt", "r")
+                file = open("data/userdata.jpg", "rb")
             except IOError:
-                file = open("data/userdata.txt", "w")
-                file.write(self.standard_data)
-                file = open("data/userdata.txt", "r")
+                file = open("data/userdata.jpg", "wb")
+                json_userdata = self.standard_data
+                encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
+                file.write(encoded_userdata)
+                file = open("data/userdata.jpg", "rb")
         else:
             os.mkdir('data')
             os.system("attrib +h data")
-            file = open('data/userdata.txt', "w")
-            file.write(self.standard_data)
-            file = open("data/userdata.txt", "r")
+            file = open('data/userdata.jpg', "wb")
+            json_userdata = self.standard_data
+            encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
+            file.write(encoded_userdata)
+            file = open("data/userdata.jpg", "rb")
         file.close()
         self.getUserData()
         return self.userdata
@@ -50,12 +54,14 @@ class LocalCloud:
         self.userdata['buildings'] = game.buildings
         self.userdata['money'] = game.money
         self.userdata['people'] = game.people_in_the_city
-        file = open("data/userdata.txt", "w")
+        file = open("data/userdata.jpg", "wb")
         json_userdata = json.dumps(self.userdata)
-        file.write(json_userdata)
+        encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
+        file.write(encoded_userdata)
 
     def getUserData(self):
-        file = open("data/userdata.txt", "r")
+        file = open("data/userdata.jpg", "rb")
         file_content = file.read()
-        file_content = json.loads(file_content)
+        decoded_userdata = base64.urlsafe_b64decode(file_content)
+        file_content = json.loads(decoded_userdata)
         self.userdata = file_content

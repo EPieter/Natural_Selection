@@ -33,7 +33,7 @@ class Shortcuts(pg.sprite.Sprite):
         for i in self.game.currentShortcuts:
             self.shortCuts.append(availableShortcuts[i - 1])
 
-        font = pg.font.Font('resources/OpenSans-SemiBold.ttf', 24)
+        font = pg.font.Font('Sprites/OpenSans-SemiBold.ttf', 24)
         for i in range(len(self.shortCuts)):
             text = font.render((self.shortCuts[i][0]), True, (255, 255, 255))
             text_rect = (10 + 0 * 76, 10 + i * 32, 500, 24)
