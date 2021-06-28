@@ -9,6 +9,7 @@ import pygame as pg
 from classes import Store
 from classes import Shortcuts
 from resources import sprites
+import time
 
 
 class Game:
@@ -24,7 +25,6 @@ class Game:
         pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
-        pg.time.wait(100)
         self.location = self.userdata['location']
         self.display_surface = None
         self.location_x = self.location[0]
@@ -44,6 +44,9 @@ class Game:
         self.createBuildings()
         self.calculateProduction()
         self.resources = ResourcesBar.ResourcesBar(self)
+        self.time1 = time.time()
+        self.time2 = None
+        self.time_switch = True
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -202,7 +205,15 @@ class Game:
 
     def updateMoney(self):
         pg.time.wait(50)
-        self.money += self.production * 0.07
+        if self.time_switch:
+            self.time2 = time.time()
+            time_diff = abs(self.time2 - self.time1)
+            self.time_switch = False
+        else:
+            self.time1 = time.time()
+            time_diff = abs(self.time1 - self.time2)
+            self.time_switch = True
+        self.money += self.production * time_diff
         self.resources.kill()
         self.resources = ResourcesBar.ResourcesBar(self)
 
