@@ -52,8 +52,8 @@ def listOfImagesDirs():
     return list_dirs
 
 
-def cropImage(dirname):
-    img = Image.open("custom/" + dirname)
+def cropImage(filename):
+    img = Image.open("custom/" + filename)
     width = img.width
     height = img.height
     diff = width - height
@@ -76,5 +76,5 @@ def cropImage(dirname):
         bottom = height
 
     new_img = img.crop((left, top, right, bottom))
-    new_img.save("Sprites/normal/" + dirname)
+    new_img.save("Sprites/normal/" + filename)
     resizeImageArray([36, 72])
