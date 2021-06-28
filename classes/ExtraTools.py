@@ -51,3 +51,30 @@ def listOfImagesDirs():
             list_dirs.append(file) if file != "normal" else None
     return list_dirs
 
+
+def cropImage(dirname):
+    img = Image.open("custom/" + dirname)
+    width = img.width
+    height = img.height
+    diff = width - height
+    print(diff)
+    if diff != 0:
+        if diff > 0:
+            left = diff / 2
+            right = left + height
+            top = 0
+            bottom = height
+        else:
+            left = 0
+            right = width
+            top = abs(diff / 2)
+            bottom = top + width
+    else:
+        left = 0
+        right = width
+        top = 0
+        bottom = height
+
+    new_img = img.crop((left, top, right, bottom))
+    new_img.save("Sprites/normal/" + dirname)
+    resizeImageArray([36, 72])
