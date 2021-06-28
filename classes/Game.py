@@ -47,6 +47,7 @@ class Game:
         self.time1 = time.time()
         self.time2 = None
         self.time_switch = True
+        self.dark_mode = False
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -150,6 +151,15 @@ class Game:
                                 self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
                                 self.calculateProduction()
+                elif event.key == pg.K_l:
+                    self.dark_mode = True if not self.dark_mode else False
+                    if self.dark_mode:
+                        data.WHITE = (40, 40, 40)
+                        data.DARKGREY = (255, 255, 255)
+                    else:
+                        data.DARKGREY = (40, 40, 40)
+                        data.WHITE = (255, 255, 255)
+
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
                     if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F1]:
