@@ -25,26 +25,28 @@ class LocalCloud:
         self.userdata = {
             'location': [0, 0],
         }
+        self.appdata_path = os.getenv("APPDATA")
 
     def getAllData(self):
-        dir_set = os.path.isdir("data")
+        dir_set = os.path.isdir(self.appdata_path + "/Natural_Selection/data")
         if dir_set:
             try:
-                file = open("data/userdata.jpg", "rb")
+                file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "rb")
             except IOError:
-                file = open("data/userdata.jpg", "wb")
+                file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "wb")
                 json_userdata = self.standard_data
                 encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
                 file.write(encoded_userdata)
-                file = open("data/userdata.jpg", "rb")
+                file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "rb")
         else:
-            os.mkdir('data')
+            os.mkdir(self.appdata_path + "/Natural_Selection")
+            os.mkdir(self.appdata_path + "/Natural_Selection/data")
             os.system("attrib +h data")
-            file = open('data/userdata.jpg', "wb")
+            file = open(self.appdata_path + '/Natural_Selection/data/userdata.jpg', "wb")
             json_userdata = self.standard_data
             encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
             file.write(encoded_userdata)
-            file = open("data/userdata.jpg", "rb")
+            file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "rb")
         file.close()
         self.getUserData()
         return self.userdata
@@ -54,13 +56,13 @@ class LocalCloud:
         self.userdata['buildings'] = game.buildings
         self.userdata['money'] = game.money
         self.userdata['people'] = game.people_in_the_city
-        file = open("data/userdata.jpg", "wb")
+        file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "wb")
         json_userdata = json.dumps(self.userdata)
         encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
         file.write(encoded_userdata)
 
     def getUserData(self):
-        file = open("data/userdata.jpg", "rb")
+        file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "rb")
         file_content = file.read()
         decoded_userdata = base64.urlsafe_b64decode(file_content)
         file_content = json.loads(decoded_userdata)
