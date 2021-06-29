@@ -32,6 +32,7 @@ translation = {
         "People": "Mensen",
         "Press ctrl for all shortcuts": "Ctrl voor alle sneltoetsen",
         "Limit workers": "Max. werkers",
+        "Close popup": "Sluit pop-up",
     },
 }
 

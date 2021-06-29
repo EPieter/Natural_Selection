@@ -73,3 +73,6 @@ class LocalCloud:
 
         if 'dark_mode' not in self.userdata:
             self.userdata["dark_mode"] = False
+        if 'lang' not in self.userdata:
+            self.userdata['lang'] = 'nl'
+
