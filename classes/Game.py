@@ -9,6 +9,7 @@ import pygame as pg
 from classes import Store
 from classes import Shortcuts
 from resources import sprites
+from classes import Settings
 import time
 
 
@@ -32,6 +33,7 @@ class Game:
         self.location_y = self.location[1]
         self.store = None
         self.shortCuts = None
+        self.settings = None
         self.buildings = []
         self.saved_buildings = self.userdata['buildings']
         self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14]
@@ -159,6 +161,8 @@ class Game:
                 elif event.key == pg.K_t:
                     data.tr.lang = 'en' if data.tr.lang != 'en' else 'nl'
                     self.reloadGame()
+                elif event.key == pg.K_F1 and 15 in self.currentShortcuts:
+                    Settings.Settings(self)
 
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
@@ -207,6 +211,11 @@ class Game:
                 self.store.selector.kill()
                 self.store.kill()
                 self.store = None
+        elif self.settings is not None:
+            if self.settings.alive():
+                self.currentShortcuts = shortcuts
+                self.settings.kill()
+                self.settings = None
 
     def createBuildings(self):
         for buildings in self.saved_buildings:
