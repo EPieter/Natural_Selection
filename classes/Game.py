@@ -25,6 +25,7 @@ class Game:
         pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
+        data.tr.lang = self.userdata['lang']
         self.location = self.userdata['location']
         self.display_surface = None
         self.location_x = self.location[0]
@@ -155,6 +156,9 @@ class Game:
                 elif event.key == pg.K_l and 14 in self.currentShortcuts:
                     self.dark_mode = True if not self.dark_mode else False
                     self.setDarkMode()
+                elif event.key == pg.K_t:
+                    data.tr.lang = 'en' if data.tr.lang != 'en' else 'nl'
+                    self.reloadGame()
 
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
@@ -262,3 +266,18 @@ class Game:
             data.DARKGREY = (40, 40, 40)
             data.WHITE = (255, 255, 255)
             data.GREEN = (0, 200, 0)
+        self.reloadGame()
+
+    def reloadGame(self):
+        if self.store is not None:
+            if self.store.alive():
+                self.store.selector.kill()
+                self.store.kill()
+                self.store = Store.Store(self)
+                self.currentShortcuts = [1, 7, 8, 9, 10, 11, 14]
+        if self.shortCuts is not None:
+            if self.shortCuts.alive():
+                self.shortCuts.kill()
+                self.shortCuts = Shortcuts.Shortcuts(self)
+                self.currentShortcuts = [1, 7, 14]
+

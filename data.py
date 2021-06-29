@@ -1,5 +1,6 @@
 import pygame as pg
 import math
+from classes import Translate as tr
 
 
 # initializes pg functions

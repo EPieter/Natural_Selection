@@ -17,22 +17,22 @@ class ResourcesBar(pg.sprite.Sprite):
         self.people = game.people_in_the_city
         self.production = game.production
         font = pg.font.Font('Sprites/OpenSans-SemiBold.ttf', 24)
-        text = font.render('Production: ' + str(format(self.production, ".2f")), True, data.DARKGREY)
+        text = font.render(data.tr.get('Production') + " €/s: " + str(format(self.production, ".2f")), True, data.DARKGREY)
         text_rect = text.get_rect()
-        text_rect.centerx = self.image.get_rect().centerx - 400
+        text_rect.centerx = self.image.get_rect().centerx - 420
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
-        text = font.render('Money: € ' + str(format(self.money, ".2f")), True, data.DARKGREY)
+        text = font.render(data.tr.get('Money') + ": € " + str(format(self.money, ".2f")), True, data.DARKGREY)
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx - 150
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
-        text = font.render('People: ' + str(self.people), True, data.DARKGREY)
+        text = font.render(data.tr.get('People') + ": " + str(self.people), True, data.DARKGREY)
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx + 100
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
-        text = font.render('Press Ctrl for all shortcuts', True, data.DARKGREY)
+        text = font.render(data.tr.get('Press ctrl for all shortcuts'), True, data.DARKGREY)
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx + 400
         text_rect.centery = self.image.get_rect().centery
