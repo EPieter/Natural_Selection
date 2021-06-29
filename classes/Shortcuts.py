@@ -3,20 +3,20 @@ from classes import Translate as tr
 import data
 
 availableShortcuts = [
-    [tr.selectLang("nl", "Esc"), tr.selectLang("nl", "Escape game")],
-    [tr.selectLang("nl", "A or arrow left"), tr.selectLang("nl", "Move left")],
-    [tr.selectLang("nl", "D or arrow right"), tr.selectLang("nl", "Move right")],
-    ["W or ArrowUp", "Move up"],
-    ["S or ArrowDown", "Move down"],
-    ["Space", "Select and open store"],
-    ["Q", "Close store"],
-    ["Left Ctrl", "Show available shortcuts"],
-    ["W or ArrowUp", "Select above"],
-    ["D or ArrowDown", "Select below"],
-    ["Return", "Purchase and place building"],
-    ["Delete", "Delete Building"],
-    ["Shift + F1-7", "Shortcut for placing buildings"],
-    ["L", "Enter dark or light mode"],
+    [tr.get("Esc"), tr.get("Escape game")],
+    [tr.get("A or arrow left"), tr.get("Move left")],
+    [tr.get("D or arrow right"), tr.get("Move right")],
+    [tr.get("W or arrow up"), tr.get("Move up")],
+    [tr.get("S or arrow down"), tr.get("Move down")],
+    [tr.get("Space"), tr.get("Select and open store")],
+    [tr.get("Q"), tr.get("Close store")],
+    [tr.get("Left Ctrl"), tr.get("Show available shortcuts")],
+    [tr.get("W or arrow up"), tr.get("Select above")],
+    [tr.get("S or arrow down"), tr.get("Select below")],
+    [tr.get("Return"), tr.get("Purchase and place building")],
+    [tr.get("Delete"), tr.get("Delete Building")],
+    [tr.get("Shift + F1-7"), tr.get("Shortcut for placing buildings")],
+    [tr.get("L"), tr.get("Enter dark or light mode")],
 ]
 
 

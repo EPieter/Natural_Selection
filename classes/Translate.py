@@ -1,3 +1,4 @@
+lang = "en"
 translation = {
     "nl": {
         "Esc": "Esc",
@@ -15,9 +16,23 @@ translation = {
         "Escape game": "Verlaat spel",
         "Move left": "Ga naar links",
         "Move right": "Ga naar rechts",
+        "Move up": "Ga naar boven",
+        "Move down": "Ga naar beneden",
+        "Select and open store": "Selecteer en open winkel",
+        "Close store": "Sluit winkel",
+        "Show available shortcuts": "Bekijk beschikbare sneltoetsen",
+        "Select above": "Selecteer hierboven",
+        "Select below": "Selecteer hieronder",
+        "Purchase and place building": "Koop en plaats gebouw",
+        "Delete Building": "Verwijder gebouw",
+        "Shortcut for placing buildings": "Snel gebouw plaatsen",
+        "Enter dark or light mode": "Verander van kleuren modus"
     },
 }
 
 
-def selectLang(lang, string):
-    return translation[lang][string]
+def get(string):
+    if lang == "en":
+        return string
+    else:
+        return translation[lang][string]
