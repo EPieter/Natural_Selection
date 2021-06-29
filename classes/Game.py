@@ -33,7 +33,7 @@ class Game:
         self.shortCuts = None
         self.buildings = []
         self.saved_buildings = self.userdata['buildings']
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14]
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.player = Player.Player(self, self.location_x, self.location_y)
@@ -47,6 +47,8 @@ class Game:
         self.time1 = time.time()
         self.time2 = None
         self.time_switch = True
+        self.dark_mode = self.userdata['dark_mode']
+        self.setDarkMode()
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -121,7 +123,7 @@ class Game:
                     self.close_menu()
                 elif event.key == pg.K_LCTRL and 8 in self.currentShortcuts:
                     self.shortCuts = Shortcuts.Shortcuts(self)
-                    self.currentShortcuts = [1, 7]
+                    self.currentShortcuts = [1, 7, 14]
 
                 elif ((event.key == pg.K_w) or (event.key == pg.K_UP)) and 9 in self.currentShortcuts:
                     self.store.selector.move(dy=-1)
@@ -150,6 +152,10 @@ class Game:
                                 self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
                                 self.calculateProduction()
+                elif event.key == pg.K_l and 14 in self.currentShortcuts:
+                    self.dark_mode = True if not self.dark_mode else False
+                    self.setDarkMode()
+
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
                     if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F1]:
@@ -176,15 +182,15 @@ class Game:
 
         if run:
             self.store = Store.Store(self)
-            self.currentShortcuts = [1, 7, 8, 9, 10, 11]
+            self.currentShortcuts = [1, 7, 8, 9, 10, 11, 14]
 
     def close_menu(self):
-        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13]
+        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
                 if self.store is not None:
                     if self.store.alive():
-                        self.currentShortcuts = [1, 7, 8, 9, 10, 11]
+                        self.currentShortcuts = [1, 7, 8, 9, 10, 11, 14]
                     else:
                         self.currentShortcuts = shortcuts
                 else:
@@ -246,3 +252,13 @@ class Game:
                 self.money -= sprites.menu_items[key][2]
                 self.people_in_the_city += sprites.menu_items[key][3]
                 self.calculateProduction()
+
+    def setDarkMode(self):
+        if self.dark_mode:
+            data.WHITE = (40, 40, 40)
+            data.DARKGREY = (255, 255, 255)
+            data.GREEN = (0, 100, 0)
+        else:
+            data.DARKGREY = (40, 40, 40)
+            data.WHITE = (255, 255, 255)
+            data.GREEN = (0, 200, 0)

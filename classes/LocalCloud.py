@@ -21,6 +21,7 @@ class LocalCloud:
                 [15, 8, 0],
                 [14, 7, 0],
             ],
+            'dark_mode': False
         })
         self.userdata = {
             'location': [0, 0],
@@ -56,6 +57,7 @@ class LocalCloud:
         self.userdata['buildings'] = game.buildings
         self.userdata['money'] = game.money
         self.userdata['people'] = game.people_in_the_city
+        self.userdata['dark_mode'] = game.dark_mode
         file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "wb")
         json_userdata = json.dumps(self.userdata)
         encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
@@ -66,4 +68,8 @@ class LocalCloud:
         file_content = file.read()
         decoded_userdata = base64.urlsafe_b64decode(file_content)
         file_content = json.loads(decoded_userdata)
+
         self.userdata = file_content
+
+        if 'dark_mode' not in self.userdata:
+            self.userdata["dark_mode"] = False
