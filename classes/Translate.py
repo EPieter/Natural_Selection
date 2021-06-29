@@ -1,4 +1,4 @@
-lang = "en"
+lang = "nl"
 translation = {
     "nl": {
         "Esc": "Esc",
@@ -26,7 +26,12 @@ translation = {
         "Purchase and place building": "Koop en plaats gebouw",
         "Delete Building": "Verwijder gebouw",
         "Shortcut for placing buildings": "Snel gebouw plaatsen",
-        "Enter dark or light mode": "Verander van kleuren modus"
+        "Enter dark or light mode": "Verander van kleuren modus",
+        "Production": "Productie",
+        "Money": "Geld",
+        "People": "Mensen",
+        "Press ctrl for all shortcuts": "Ctrl voor alle sneltoetsen",
+        "Limit workers": "Max. werkers",
     },
 }
 

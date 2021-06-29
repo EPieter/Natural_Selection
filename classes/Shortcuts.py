@@ -1,22 +1,21 @@
 import pygame as pg
-from classes import Translate as tr
 import data
 
 availableShortcuts = [
-    [tr.get("Esc"), tr.get("Escape game")],
-    [tr.get("A or arrow left"), tr.get("Move left")],
-    [tr.get("D or arrow right"), tr.get("Move right")],
-    [tr.get("W or arrow up"), tr.get("Move up")],
-    [tr.get("S or arrow down"), tr.get("Move down")],
-    [tr.get("Space"), tr.get("Select and open store")],
-    [tr.get("Q"), tr.get("Close store")],
-    [tr.get("Left Ctrl"), tr.get("Show available shortcuts")],
-    [tr.get("W or arrow up"), tr.get("Select above")],
-    [tr.get("S or arrow down"), tr.get("Select below")],
-    [tr.get("Return"), tr.get("Purchase and place building")],
-    [tr.get("Delete"), tr.get("Delete Building")],
-    [tr.get("Shift + F1-7"), tr.get("Shortcut for placing buildings")],
-    [tr.get("L"), tr.get("Enter dark or light mode")],
+    [data.tr.get("Esc"), data.tr.get("Escape game")],
+    [data.tr.get("A or arrow left"), data.tr.get("Move left")],
+    [data.tr.get("D or arrow right"), data.tr.get("Move right")],
+    [data.tr.get("W or arrow up"), data.tr.get("Move up")],
+    [data.tr.get("S or arrow down"), data.tr.get("Move down")],
+    [data.tr.get("Space"), data.tr.get("Select and open store")],
+    [data.tr.get("Q"), data.tr.get("Close store")],
+    [data.tr.get("Left Ctrl"), data.tr.get("Show available shortcuts")],
+    [data.tr.get("W or arrow up"), data.tr.get("Select above")],
+    [data.tr.get("S or arrow down"), data.tr.get("Select below")],
+    [data.tr.get("Return"), data.tr.get("Purchase and place building")],
+    [data.tr.get("Delete"), data.tr.get("Delete Building")],
+    [data.tr.get("Shift + F1-7"), data.tr.get("Shortcut for placing buildings")],
+    [data.tr.get("L"), data.tr.get("Enter dark or light mode")],
 ]
 
 
