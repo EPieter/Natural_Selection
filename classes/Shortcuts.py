@@ -1,11 +1,11 @@
 import pygame as pg
-
+from classes import Translate as tr
 import data
 
 availableShortcuts = [
-    ["Esc", "Escape game"],
-    ["A or ArrowLeft", "Move left"],
-    ["D or ArrowRight", "Move right"],
+    [tr.selectLang("nl", "Esc"), tr.selectLang("nl", "Escape game")],
+    [tr.selectLang("nl", "A or arrow left"), tr.selectLang("nl", "Move left")],
+    [tr.selectLang("nl", "D or arrow right"), tr.selectLang("nl", "Move right")],
     ["W or ArrowUp", "Move up"],
     ["S or ArrowDown", "Move down"],
     ["Space", "Select and open store"],
