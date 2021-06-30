@@ -1,4 +1,6 @@
 lang = "nl"
+state = "nl"
+
 translation = {
     "nl": {
         "Esc": "Esc",
