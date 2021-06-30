@@ -6,6 +6,8 @@ appdata = os.getenv("APPDATA") + "/"
 TILE_SIZE = 36
 img_dir = str(TILE_SIZE) + "px"
 
+price_bitcoin = 0
+
 TEXTURE_GRASS01 = pg.image.load(appdata + "Natural_Selection/Sprites/" + img_dir + "/Clovers 00 seamless.jpg")
 
 STORE_SMALL_HOUSE_36 = pg.image.load(appdata + "Natural_Selection/Sprites/36px/Small House.png")
@@ -40,7 +42,7 @@ menu_items = [
     ["Big house", STORE_BIG_HOUSE, 200, 15, 0, 0],
     ["Small Factory", STORE_SMALL_FACTORY, 300, 0, 0.08, 20],
     ["Big Factory", STORE_BIG_FACTORY, 1200, 0, 0.7, 100],
-    ["Bitcoin", STORE_BITCOIN, 80000, 0, 0, 0],
+    ["Bitcoin", STORE_BITCOIN, 0, 0, 0, 0],
     ["Diamond", STORE_DIAMOND, 1500000, 0, 0, 0],
 ]
 
