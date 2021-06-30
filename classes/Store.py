@@ -33,7 +33,7 @@ class Store(pg.sprite.Sprite):
         text = font.render(data.tr.get('People'), True, data.WHITE_TEXT)
         text_rect = (10 + 3 * 76, 5, 500, 24)
         self.image.blit(text, text_rect)
-        text = font.render(data.tr.get('Production') + ' €/sp', True, data.WHITE_TEXT)
+        text = font.render(data.tr.get('Production') + ' ' + data.Tools.moneySymbol() + '/sp', True, data.WHITE_TEXT)
         text_rect = (10 + 4 * 76, 5, 500, 24)
         self.image.blit(text, text_rect)
         text = font.render(data.tr.get('Limit workers'), True, data.WHITE_TEXT)
@@ -43,7 +43,7 @@ class Store(pg.sprite.Sprite):
         for i in range(1):
             for j in range(7):
                 self.image.blit(sprites.menu_items[j][1], (10 + i * 76, 38 + j * 76, 76, 76))
-                text = font.render('€ ' + str(sprites.menu_items[j][2]), True, data.WHITE_TEXT)
+                text = font.render(data.Tools.moneySymbol() + ' ' + str(sprites.menu_items[j][2]), True, data.WHITE_TEXT)
                 text_rect = (10 + 1.5 * 76, 68 + j * 76, 500, 24)
                 self.image.blit(text, text_rect)
                 text = font.render(str(sprites.menu_items[j][3]), True, data.WHITE_TEXT) if sprites.menu_items[j][3] != 0 else font.render("n/a", True, data.WHITE_TEXT)

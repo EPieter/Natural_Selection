@@ -214,7 +214,7 @@ class Game:
                                    GameBuildings.GameBuildings(self, buildings[0], buildings[1], buildings[2])])
 
     def updateMoney(self):
-        pg.time.wait(30)
+        pg.time.wait(20)
         if self.time_switch:
             self.time2 = time.time()
             time_diff = abs(self.time2 - self.time1)

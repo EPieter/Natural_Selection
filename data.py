@@ -1,5 +1,6 @@
 import pygame as pg
 import math
+from classes import Tools
 from classes import Translate as tr
 
 
@@ -11,6 +12,7 @@ infoObject = pg.display.Info()
 
 # display size
 screen = pg.display.set_mode((infoObject.current_w, infoObject.current_h))
+lang = tr.lang
 
 # Setup the clock for a decent frame rate
 clock = pg.time.Clock()
