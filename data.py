@@ -1,3 +1,5 @@
+import os
+
 import pygame as pg
 import math
 from classes import Tools
@@ -51,3 +53,8 @@ BEGIN_GRID_X = (WIDTH - GRID_WIDTH * TILE_SIZE) / 2
 BEGIN_GRID_Y = (HEIGHT - GRID_HEIGHT * TILE_SIZE) / 2
 
 img_dir = str(TILE_SIZE) + "px"
+
+appdata = os.getenv("APPDATA") + "/Natural_Selection/"
+
+font = appdata + "Sprites/OpenSans-SemiBold.ttf"
+

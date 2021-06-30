@@ -40,9 +40,7 @@ class LocalCloud:
                 file.write(encoded_userdata)
                 file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "rb")
         else:
-            os.mkdir(self.appdata_path + "/Natural_Selection")
             os.mkdir(self.appdata_path + "/Natural_Selection/data")
-            os.system("attrib +h data")
             file = open(self.appdata_path + '/Natural_Selection/data/userdata.jpg', "wb")
             json_userdata = self.standard_data
             encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))

@@ -26,7 +26,7 @@ class Store(pg.sprite.Sprite):
         self.rect.x = data.MIDDLE_OF_THE_SCREEN[0] - 300
         self.rect.y = data.MIDDLE_OF_THE_SCREEN[1] - 340
         self.selector = StoreSelector.StoreSelector(game)
-        font = pg.font.Font('Sprites/OpenSans-SemiBold.ttf', 18)
+        font = pg.font.Font(data.font, 18)
         text = font.render(data.tr.get('Money'), True, data.WHITE_TEXT)
         text_rect = (10 + 1.5 * 76, 5, 500, 24)
         self.image.blit(text, text_rect)
@@ -39,7 +39,7 @@ class Store(pg.sprite.Sprite):
         text = font.render(data.tr.get('Limit workers'), True, data.WHITE_TEXT)
         text_rect = (10 + 6 * 76, 5, 500, 24)
         self.image.blit(text, text_rect)
-        font = pg.font.Font('Sprites/OpenSans-SemiBold.ttf', 20)
+        font = pg.font.Font(data.font, 20)
         for i in range(1):
             for j in range(7):
                 self.image.blit(sprites.menu_items[j][1], (10 + i * 76, 38 + j * 76, 76, 76))
