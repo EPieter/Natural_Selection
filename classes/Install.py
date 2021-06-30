@@ -29,6 +29,8 @@ def loadSprites():
     for sprite in sprites:
         r = requests.get(url + sprite, allow_redirects=True)
         open(path + sprite, 'wb').write(r.content)
+    r = requests.get(url + "OpenSans-SemiBold.ttf", allow_redirects=True)
+    open(appdata + "/Natural_Selection/Sprites/OpenSans-SemiBold.ttf", "wb").write(r.content)
 
 
 def makeDirs():
