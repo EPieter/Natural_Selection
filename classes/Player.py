@@ -8,7 +8,7 @@ class Player(pg.sprite.Sprite):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.Surface((sprites.TILESIZE, sprites.TILESIZE))
+        self.image = pg.Surface((sprites.TILE_SIZE, sprites.TILE_SIZE))
         self.image.fill(data.WHITE)
         self.rect = self.image.get_rect()
         self.x = x
