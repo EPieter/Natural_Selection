@@ -11,6 +11,8 @@ from classes import Shortcuts
 from resources import sprites
 from classes import Settings
 import time
+import urllib.request
+import json
 
 
 class Game:
@@ -52,6 +54,11 @@ class Game:
         self.time_switch = True
         self.dark_mode = self.userdata['dark_mode']
         self.setDarkMode()
+        self.bitcoin_price = 0
+        self.counter_btc = 500
+        self.url_btc = "https://api.nomics.com/v1/currencies/ticker?key=0a9d6b39d77c59f71d722322ecec7630a7b5ed25" \
+                       "&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&per-page=100&page=1 "
+        self.updateBitcoin(force=True)
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -139,7 +146,7 @@ class Game:
                         self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y,
                                                GameBuildings.GameBuildings(self, self.location_x, self.location_y,
                                                                            self.store.selector.x_y)])
-                        self.money -= sprites.menu_items[self.store.selector.x_y][2]
+                        self.money -= sprites.menu_items[self.store.selector.x_y][2] if sprites.menu_items[self.store.selector.x_y][0] != "Bitcoin" else float(self.bitcoin_price)
                         self.people_in_the_city += sprites.menu_items[self.store.selector.x_y][3]
                         self.calculateProduction()
                         self.resources.kill()
@@ -235,6 +242,7 @@ class Game:
         self.money += self.production * time_diff
         self.resources.kill()
         self.resources = ResourcesBar.ResourcesBar(self)
+        self.updateBitcoin()
 
     def calculateProduction(self):
         buildings = self.buildings
@@ -290,3 +298,9 @@ class Game:
                 self.shortCuts = Shortcuts.Shortcuts(self)
                 self.currentShortcuts = [1, 7, 14]
 
+    def updateBitcoin(self, force=False):
+        if self.counter_btc > 0 and not force:
+            self.counter_btc -= 1
+        else:
+            self.counter_btc = 1000
+            self.bitcoin_price = json.loads(urllib.request.urlopen(self.url_btc).read())[0]["price"]
