@@ -13,7 +13,16 @@ class Settings(pg.sprite.Sprite):
         self.rect.x = data.MIDDLE_OF_THE_SCREEN[0] - 300
         self.rect.y = data.MIDDLE_OF_THE_SCREEN[1] - 200
 
-        font = pg.font.Font('Sprites/OpenSans-SemiBold.ttf', 24)
+        font = pg.font.Font(data.font, 24)
+        text = font.render(data.tr.get('Language'), True, data.WHITE_TEXT)
+        text_rect = (10, 5, 500, 24)
+        self.image.blit(text, text_rect)
+        text = font.render(data.tr.get('State'), True, data.WHITE_TEXT)
+        text_rect = (10, 5 + 50, 500, 24)
+        self.image.blit(text, text_rect)
+        text = font.render(data.tr.get('Dark mode'), True,data.WHITE_TEXT)
+        text_rect = (10, 5 + 100, 500, 24)
+        self.image.blit(text, text_rect)
 
     def die(self):
         self.kill()
