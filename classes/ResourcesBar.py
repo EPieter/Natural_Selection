@@ -17,12 +17,12 @@ class ResourcesBar(pg.sprite.Sprite):
         self.people = game.people_in_the_city
         self.production = game.production
         font = pg.font.Font(data.font, 24)
-        text = font.render(data.tr.get('Production') + ": " + data.ToolStore.priceFormatter(self.production) + " " + data.ToolStore.moneySymbol() + "/s", True, data.DARKGREY)
+        text = font.render(data.tr.get('Production') + ": " + data.ToolStore.priceFormatterIncludeCalc(self.production) + " " + data.ToolStore.moneySymbol() + "/s", True, data.DARKGREY)
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx - 420
         text_rect.centery = self.image.get_rect().centery
         self.image.blit(text, text_rect)
-        text = font.render(data.tr.get('Money') + ": " + data.ToolStore.moneySymbol() + " " + data.ToolStore.priceFormatter(self.money), True, data.DARKGREY)
+        text = font.render(data.tr.get('Money') + ": " + data.ToolStore.moneySymbol() + " " + data.ToolStore.priceFormatterIncludeCalc(self.money), True, data.DARKGREY)
         text_rect = text.get_rect()
         text_rect.centerx = self.image.get_rect().centerx - 150
         text_rect.centery = self.image.get_rect().centery

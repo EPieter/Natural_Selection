@@ -30,6 +30,7 @@ class Game:
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
         data.tr.lang = self.userdata['lang']
+        data.tr.state = self.userdata['state']
         self.location = self.userdata['location']
         self.display_surface = None
         self.location_x = self.location[0]
@@ -143,12 +144,12 @@ class Game:
                     self.store.selector.move(dy=1)
 
                 elif event.key == pg.K_RETURN and 11 in self.currentShortcuts:
-                    price = ToolStore.priceCalculator(sprites.menu_items[self.store.selector.x_y][2]) if self.store.selector.x_y != 5 else float(self.bitcoin_price)
+                    price = sprites.menu_items[self.store.selector.x_y][2] if self.store.selector.x_y != 5 else float(self.bitcoin_price)
                     if self.money >= price:
                         self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y,
                                                GameBuildings.GameBuildings(self, self.location_x, self.location_y,
                                                                            self.store.selector.x_y)])
-                        self.money -= ToolStore.priceCalculator(sprites.menu_items[self.store.selector.x_y][2]) if sprites.menu_items[self.store.selector.x_y][0] != "Bitcoin" else ToolStore.priceCalculator(float(self.bitcoin_price))
+                        self.money -= price
                         self.people_in_the_city += sprites.menu_items[self.store.selector.x_y][3]
                         self.calculateProduction()
                         self.resources.kill()
@@ -161,7 +162,7 @@ class Game:
                             if i[1] == self.location_y:
                                 i[3].kill()
                                 self.people_in_the_city -= sprites.menu_items[i[2]][3]
-                                self.money += ToolStore.priceCalculator(sprites.menu_items[i[2]][2]) / 2
+                                self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
                                 self.calculateProduction()
                 elif event.key == pg.K_l and 14 in self.currentShortcuts:
@@ -243,7 +244,7 @@ class Game:
             self.time1 = time.time()
             time_diff = abs(self.time1 - self.time2)
             self.time_switch = True
-        self.money += ToolStore.priceCalculator(self.production) * time_diff
+        self.money += self.production * time_diff
         self.resources.kill()
         self.resources = ResourcesBar.ResourcesBar(self)
         self.updateBitcoin()
@@ -264,7 +265,7 @@ class Game:
                 people = 0
 
     def createBuilding(self, key):
-        price = ToolStore.priceCalculator(sprites.menu_items[key][2]) if key != 5 else ToolStore.priceCalculator(float(self.bitcoin_price))
+        price = sprites.menu_items[key][2] if key != 5 else float(self.bitcoin_price)
         if self.money >= price:
             run = True
             if self.buildings:
@@ -275,7 +276,7 @@ class Game:
                 self.buildings.append([self.location_x, self.location_y, key,
                                        GameBuildings.GameBuildings(self, self.location_x, self.location_y,
                                                                    key)])
-                self.money -= ToolStore.priceCalculator(sprites.menu_items[key][2])
+                self.money -= price
                 self.people_in_the_city += sprites.menu_items[key][3]
                 self.calculateProduction()
 
