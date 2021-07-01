@@ -2,7 +2,7 @@ import os
 
 import pygame as pg
 import math
-from classes import Tools
+from classes import ToolStore
 from classes import Translate as tr
 
 
