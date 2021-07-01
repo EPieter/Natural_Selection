@@ -10,7 +10,6 @@ from classes import Store
 from classes import Shortcuts
 from resources import sprites
 from classes import Settings
-from classes import ToolStore
 import time
 import urllib.request
 import json
@@ -25,8 +24,8 @@ class Game:
         pg.init()
         pg.display.set_caption(data.TITLE)
         self.clock = pg.time.Clock()
-        pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
-        pg.key.set_repeat(500, 100)
+        # pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+        # pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
         data.tr.lang = self.userdata['lang']
@@ -40,7 +39,7 @@ class Game:
         self.settings = None
         self.buildings = []
         self.saved_buildings = self.userdata['buildings']
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 15]
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.player = Player.Player(self, self.location_x, self.location_y)
@@ -173,7 +172,8 @@ class Game:
                     data.tr.state = 'us' if data.tr.state != 'us' else 'nl'
                     self.reloadGame()
                 elif event.key == pg.K_F1 and 15 in self.currentShortcuts:
-                    Settings.Settings(self)
+                    self.settings = Settings.Settings(self)
+                    self.currentShortcuts = [1, 7, 14]
 
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
@@ -204,7 +204,7 @@ class Game:
             self.currentShortcuts = [1, 7, 8, 9, 10, 11, 14]
 
     def close_menu(self):
-        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14]
+        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 15]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
                 if self.store is not None:
@@ -292,6 +292,7 @@ class Game:
         self.reloadGame()
 
     def reloadGame(self):
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 15]
         if self.store is not None:
             if self.store.alive():
                 self.store.selector.kill()
@@ -302,6 +303,11 @@ class Game:
             if self.shortCuts.alive():
                 self.shortCuts.kill()
                 self.shortCuts = Shortcuts.Shortcuts(self)
+                self.currentShortcuts = [1, 7, 14]
+        if self.settings is not None:
+            if self.settings.alive():
+                self.settings.kill()
+                self.settings = Settings.Settings(self)
                 self.currentShortcuts = [1, 7, 14]
 
     def updateBitcoin(self, force=False):

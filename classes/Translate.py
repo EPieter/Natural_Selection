@@ -42,6 +42,11 @@ translation = {
         "Press ctrl for all shortcuts": "Ctrl voor alle sneltoetsen",
         "Limit workers": "Max. werkers",
         "Close popup": "Sluit pop-up",
+        "F1": "F1",
+        "Settings": "Instellingen",
+        "Dark mode": "Donkere modus",
+        "Language": "Taal",
+        "State": "Land",
     },
 }
 
