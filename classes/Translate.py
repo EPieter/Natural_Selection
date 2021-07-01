@@ -1,3 +1,10 @@
+countries = {
+    "nl": ["nl", "EUR", "eu"],
+    "be": ["nl", "EUR", "eu"],
+    "uk": ["en", "GBP", "eu"],
+    "us": ["en", "USD", "usa"],
+}
+
 lang = "nl"
 state = "nl"
 
