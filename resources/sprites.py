@@ -44,7 +44,7 @@ menu_items = [
     ["Small Factory", STORE_SMALL_FACTORY, 300, 0, 0.08, 20],
     ["Big Factory", STORE_BIG_FACTORY, 1200, 0, 0.1, 200],
     ["Bitcoin", STORE_BITCOIN, 0, 0, 0, 0],
-    ["Diamond", STORE_DIAMOND, 1500000, 0, 0, 0],
+    ["Diamond", STORE_DIAMOND, 500000, 0, 0, 0],
 ]
 
 

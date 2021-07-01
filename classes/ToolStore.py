@@ -5,6 +5,15 @@ import urllib.request
 
 def priceFormatter(price, tt=",.2f"):
     if Translate.lang == "nl":
+        new_price = str(format(price, tt)).replace(".", "m").replace(",", ".").replace("m", ",")
+
+    else:
+        new_price = str(format(price, tt))
+    return new_price
+
+
+def priceFormatterIncludeCalc(price, tt=",.2f"):
+    if Translate.lang == "nl":
         new_price = str(format(priceCalculator(price), tt)).replace(".", "m").replace(",", ".").replace("m", ",")
 
     else:

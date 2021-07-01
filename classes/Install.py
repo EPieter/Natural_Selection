@@ -21,6 +21,7 @@ def install():
     makeDirs()
     loadSprites()
     ExtraTools.resizeImageArray([36, 72])
+    addToStartMenu()
 
 
 def loadSprites():
@@ -44,4 +45,6 @@ def makeDirs():
     file.write(base64.urlsafe_b64encode("version 1.5.exp".encode("utf-8")))
 
 
+def addToStartMenu():
+    import os
 

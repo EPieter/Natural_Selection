@@ -56,6 +56,8 @@ class LocalCloud:
         self.userdata['money'] = game.money
         self.userdata['people'] = game.people_in_the_city
         self.userdata['dark_mode'] = game.dark_mode
+        self.userdata['lang'] = data.tr.lang
+        self.userdata['state'] = data.tr.state
         file = open(self.appdata_path + "/Natural_Selection/data/userdata.jpg", "wb")
         json_userdata = json.dumps(self.userdata)
         encoded_userdata = base64.urlsafe_b64encode(json_userdata.encode("utf-8"))
@@ -73,4 +75,6 @@ class LocalCloud:
             self.userdata["dark_mode"] = False
         if 'lang' not in self.userdata:
             self.userdata['lang'] = 'nl'
+        if 'state' not in self.userdata:
+            self.userdata['state'] = 'nl'
 
