@@ -20,8 +20,14 @@ class Settings(pg.sprite.Sprite):
         text = font.render(data.tr.get('State'), True, data.WHITE_TEXT)
         text_rect = (10, 5 + 50, 500, 24)
         self.image.blit(text, text_rect)
-        text = font.render(data.tr.get('Dark mode'), True,data.WHITE_TEXT)
+        text = font.render(data.tr.get('Dark mode'), True, data.WHITE_TEXT)
         text_rect = (10, 5 + 100, 500, 24)
+        self.image.blit(text, text_rect)
+        if game.dark_mode:
+            text = font.render(data.tr.get("On"), True, (0, 0, 200))
+        else:
+            text = font.render(data.tr.get("Off"), True, (200, 0, 0))
+        text_rect = (10 + 200, 5 + 100, 500, 24)
         self.image.blit(text, text_rect)
 
     def die(self):
@@ -29,3 +35,5 @@ class Settings(pg.sprite.Sprite):
 
     def isActive(self):
         return self.alive()
+
+

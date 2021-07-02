@@ -10,6 +10,7 @@ else:
     file_content = str(base64.urlsafe_b64decode(file.read()), "utf-8")
     if not file_content == "version 1.5.exp":
         from classes import Update
+        Update.Update()
 
 if True:
     from classes import Game
