@@ -55,11 +55,12 @@ class Game:
         self.time_switch = True
         self.dark_mode = self.userdata['dark_mode']
         self.setDarkMode()
-        self.bitcoin_price = 0
+        self.bitcoin_price = 50000
         self.counter_btc = 500
         self.url_btc = "https://api.nomics.com/v1/currencies/ticker?key=0a9d6b39d77c59f71d722322ecec7630a7b5ed25" \
                        "&ids=BTC,ETH,XRP&interval=1d,30d&convert=BUSD&per-page=100&page=1 "
         self.updateBitcoin(force=True)
+
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -151,8 +152,6 @@ class Game:
                         self.money -= price
                         self.people_in_the_city += sprites.menu_items[self.store.selector.x_y][3]
                         self.calculateProduction()
-                        self.resources.kill()
-                        self.resources = ResourcesBar.ResourcesBar(self)
                     self.close_menu()
 
                 elif event.key == pg.K_DELETE and 12 in self.currentShortcuts:
@@ -161,7 +160,10 @@ class Game:
                             if i[1] == self.location_y:
                                 i[3].kill()
                                 self.people_in_the_city -= sprites.menu_items[i[2]][3]
-                                self.money += sprites.menu_items[i[2]][2] / 2
+                                if sprites.menu_items[i[2]][0] == "Bitcoin":
+                                    self.money += float(self.bitcoin_price)
+                                else:
+                                    self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
                                 self.calculateProduction()
                 elif event.key == pg.K_l and 14 in self.currentShortcuts:
