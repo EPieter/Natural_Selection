@@ -45,6 +45,7 @@ def makeDirs():
     file.write(base64.urlsafe_b64encode("version 1.6.1".encode("utf-8")))
 
 
+
 def addToStartMenu():
     import os
 
