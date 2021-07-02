@@ -39,7 +39,7 @@ class Game:
         self.settings = None
         self.buildings = []
         self.saved_buildings = self.userdata['buildings']
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 15]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 15]
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.player = Player.Player(self, self.location_x, self.location_y)
@@ -205,7 +205,7 @@ class Game:
             self.currentShortcuts = [1, 7, 8, 9, 10, 11]
 
     def close_menu(self):
-        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 15]
+        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 15]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
                 if self.store is not None:
@@ -295,7 +295,7 @@ class Game:
         self.reloadGame()
 
     def reloadGame(self):
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 15]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 15]
         if self.store is not None:
             if self.store.alive():
                 self.store.selector.kill()
