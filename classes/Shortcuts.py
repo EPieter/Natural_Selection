@@ -30,6 +30,7 @@ class Shortcuts(pg.sprite.Sprite):
             [data.tr.get("L"), data.tr.get("Enter dark or light mode")],
             [data.tr.get("F1"), data.tr.get("Settings")],
             [data.tr.get("Mouse"), data.tr.get("Click")],
+
         ]
         self.shortCuts.append([data.tr.get("Q"), data.tr.get("Close popup")])
         for i in self.game.currentShortcuts:
