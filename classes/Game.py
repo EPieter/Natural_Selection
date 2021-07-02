@@ -39,7 +39,7 @@ class Game:
         self.settings = None
         self.buildings = []
         self.saved_buildings = self.userdata['buildings']
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 15]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 15]
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.player = Player.Player(self, self.location_x, self.location_y)
@@ -134,7 +134,7 @@ class Game:
                     self.close_menu()
                 elif event.key == pg.K_LCTRL and 8 in self.currentShortcuts:
                     self.shortCuts = Shortcuts.Shortcuts(self)
-                    self.currentShortcuts = [1, 7, 14]
+                    self.currentShortcuts = [1, 7]
 
                 elif ((event.key == pg.K_w) or (event.key == pg.K_UP)) and 9 in self.currentShortcuts:
                     self.store.selector.move(dy=-1)
@@ -169,7 +169,7 @@ class Game:
                     self.reloadGame()
                 elif event.key == pg.K_F1 and 15 in self.currentShortcuts:
                     self.settings = Settings.Settings(self)
-                    self.currentShortcuts = [1, 7, 14, 16]
+                    self.currentShortcuts = [1, 7, 16]
                     pg.mouse.set_cursor(*pg.cursors.arrow)
                     pg.key.set_repeat(500, 100)
                     pg.mouse.set_pos(data.MIDDLE_OF_THE_SCREEN)
@@ -202,15 +202,15 @@ class Game:
 
         if run:
             self.store = Store.Store(self)
-            self.currentShortcuts = [1, 7, 8, 9, 10, 11, 14]
+            self.currentShortcuts = [1, 7, 8, 9, 10, 11]
 
     def close_menu(self):
-        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 15]
+        shortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 15]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
                 if self.store is not None:
                     if self.store.alive():
-                        self.currentShortcuts = [1, 7, 8, 9, 10, 11, 14]
+                        self.currentShortcuts = [1, 7, 8, 9, 10, 11]
                     else:
                         self.currentShortcuts = shortcuts
                 else:
@@ -295,23 +295,23 @@ class Game:
         self.reloadGame()
 
     def reloadGame(self):
-        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 13, 14, 15]
+        self.currentShortcuts = [1, 2, 3, 4, 5, 6, 8, 12, 15]
         if self.store is not None:
             if self.store.alive():
                 self.store.selector.kill()
                 self.store.kill()
                 self.store = Store.Store(self)
-                self.currentShortcuts = [1, 7, 8, 9, 10, 11, 14]
+                self.currentShortcuts = [1, 7, 8, 9, 10, 11]
         if self.shortCuts is not None:
             if self.shortCuts.alive():
                 self.shortCuts.kill()
                 self.shortCuts = Shortcuts.Shortcuts(self)
-                self.currentShortcuts = [1, 7, 14]
+                self.currentShortcuts = [1, 7]
         if self.settings is not None:
             if self.settings.alive():
                 self.settings.kill()
                 self.settings = Settings.Settings(self)
-                self.currentShortcuts = [1, 7, 14, 16]
+                self.currentShortcuts = [1, 7, 16]
 
     def updateBitcoin(self, force=False):
         if self.counter_btc > 0 and not force:
