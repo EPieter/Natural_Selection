@@ -42,7 +42,7 @@ def makeDirs():
     if not os.path.isdir(appdata + "/Natural_Selection/Sprites/normal"):
         os.mkdir(appdata + "/Natural_Selection/Sprites/normal")
     file = open(appdata + '/Natural_Selection/Sprites/install.txt', "wb")
-    file.write(base64.urlsafe_b64encode("version 1.6".encode("utf-8")))
+    file.write(base64.urlsafe_b64encode("version 1.6.1".encode("utf-8")))
 
 
 def addToStartMenu():

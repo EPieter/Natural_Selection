@@ -8,7 +8,7 @@ if not os.path.exists(appdata + "/Natural_Selection/Sprites/install.txt"):
 else:
     file = open(appdata + "/Natural_Selection/Sprites/install.txt", "rb")
     file_content = str(base64.urlsafe_b64decode(file.read()), "utf-8")
-    if not file_content == "version 1.6":
+    if not file_content == "version 1.6.1":
         from classes import Update
         Update.Update()
 
