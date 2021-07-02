@@ -24,8 +24,8 @@ class Game:
         pg.init()
         pg.display.set_caption(data.TITLE)
         self.clock = pg.time.Clock()
-        # pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
-        # pg.key.set_repeat(500, 100)
+        pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+        pg.key.set_repeat(500, 100)
         self.localCloud = LocalCloud.LocalCloud()
         self.userdata = self.localCloud.getAllData()
         data.tr.lang = self.userdata['lang']
@@ -60,7 +60,6 @@ class Game:
         self.url_btc = "https://api.nomics.com/v1/currencies/ticker?key=0a9d6b39d77c59f71d722322ecec7630a7b5ed25" \
                        "&ids=BTC,ETH,XRP&interval=1d,30d&convert=BUSD&per-page=100&page=1 "
         self.updateBitcoin(force=True)
-
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -144,7 +143,8 @@ class Game:
                     self.store.selector.move(dy=1)
 
                 elif event.key == pg.K_RETURN and 11 in self.currentShortcuts:
-                    price = sprites.menu_items[self.store.selector.x_y][2] if self.store.selector.x_y != 5 else float(self.bitcoin_price)
+                    price = sprites.menu_items[self.store.selector.x_y][2] if self.store.selector.x_y != 5 else float(
+                        self.bitcoin_price)
                     if self.money >= price:
                         self.buildings.append([self.location_x, self.location_y, self.store.selector.x_y,
                                                GameBuildings.GameBuildings(self, self.location_x, self.location_y,
@@ -166,16 +166,13 @@ class Game:
                                     self.money += sprites.menu_items[i[2]][2] / 2
                                 self.buildings.remove(i)
                                 self.calculateProduction()
-                elif event.key == pg.K_l and 14 in self.currentShortcuts:
-                    self.dark_mode = True if not self.dark_mode else False
-                    self.setDarkMode()
-                elif event.key == pg.K_t:
-                    data.tr.lang = 'en' if data.tr.lang != 'en' else 'nl'
-                    data.tr.state = 'us' if data.tr.state != 'us' else 'nl'
                     self.reloadGame()
                 elif event.key == pg.K_F1 and 15 in self.currentShortcuts:
                     self.settings = Settings.Settings(self)
                     self.currentShortcuts = [1, 7, 14, 16]
+                    pg.mouse.set_cursor(*pg.cursors.arrow)
+                    pg.key.set_repeat(500, 100)
+                    pg.mouse.set_pos(data.MIDDLE_OF_THE_SCREEN)
 
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
@@ -193,9 +190,8 @@ class Game:
                         self.createBuilding(5)
                     elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F7]:
                         self.createBuilding(6)
-
-                if 16 in self.currentShortcuts:
-                    pass
+            if event.type == pg.MOUSEBUTTONUP and 16 in self.currentShortcuts:
+                self.settings.getElement(pg.mouse.get_pos())
 
     def show_menu(self):
         run = True
@@ -232,6 +228,8 @@ class Game:
                 self.currentShortcuts = shortcuts
                 self.settings.kill()
                 self.settings = None
+                pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
+                pg.key.set_repeat(500, 100)
 
     def createBuildings(self):
 
@@ -313,7 +311,7 @@ class Game:
             if self.settings.alive():
                 self.settings.kill()
                 self.settings = Settings.Settings(self)
-                self.currentShortcuts = [1, 7, 14]
+                self.currentShortcuts = [1, 7, 14, 16]
 
     def updateBitcoin(self, force=False):
         if self.counter_btc > 0 and not force:
