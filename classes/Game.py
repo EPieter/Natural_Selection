@@ -58,7 +58,7 @@ class Game:
         self.bitcoin_price = 0
         self.counter_btc = 500
         self.url_btc = "https://api.nomics.com/v1/currencies/ticker?key=0a9d6b39d77c59f71d722322ecec7630a7b5ed25" \
-                       "&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&per-page=100&page=1 "
+                       "&ids=BTC,ETH,XRP&interval=1d,30d&convert=BUSD&per-page=100&page=1 "
         self.updateBitcoin(force=True)
 
     def new(self):
@@ -173,7 +173,7 @@ class Game:
                     self.reloadGame()
                 elif event.key == pg.K_F1 and 15 in self.currentShortcuts:
                     self.settings = Settings.Settings(self)
-                    self.currentShortcuts = [1, 7, 14]
+                    self.currentShortcuts = [1, 7, 14, 16]
 
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
@@ -191,6 +191,9 @@ class Game:
                         self.createBuilding(5)
                     elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F7]:
                         self.createBuilding(6)
+
+                if 16 in self.currentShortcuts:
+                    pass
 
     def show_menu(self):
         run = True

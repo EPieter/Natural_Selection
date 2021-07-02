@@ -47,6 +47,10 @@ translation = {
         "Dark mode": "Donkere modus",
         "Language": "Taal",
         "State": "Land",
+        "Mouse": "Muis",
+        "Click": "Klik",
+        "On": "Aan",
+        "Off": "Uit"
     },
 }
 
