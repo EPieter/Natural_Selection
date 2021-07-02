@@ -30,6 +30,7 @@ class Settings(pg.sprite.Sprite):
         text_rect = (10 + 200, 5 + 100, 500, 24)
         self.image.blit(text, text_rect)
 
+
     def die(self):
         self.kill()
 
