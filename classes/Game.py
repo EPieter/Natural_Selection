@@ -13,6 +13,7 @@ from classes import Settings
 import time
 import urllib.request
 import json
+from threading import Thread
 
 
 class Game:
@@ -56,10 +57,16 @@ class Game:
         self.dark_mode = self.userdata['dark_mode']
         self.setDarkMode()
         self.bitcoin_price = 50000
-        self.counter_btc = 500
         self.url_btc = "https://api.nomics.com/v1/currencies/ticker?key=0a9d6b39d77c59f71d722322ecec7630a7b5ed25" \
                        "&ids=BTC,ETH,XRP&interval=1d,30d&convert=BUSD&per-page=100&page=1 "
-        self.updateBitcoin(force=True)
+        thread1 = Thread(target=self.threadingBitcoin, args=())
+        thread1.daemon = True  # Daemonize thread
+        thread1.start()  # Start the execution
+        self.cacheBuildings = []
+        thread2 = Thread(target=self.autoSave, args=())
+        thread2.daemon = True  # Daemonize thread
+        thread2.start()  # Start the execution
+
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -175,24 +182,23 @@ class Game:
                     self.settings = Settings.Settings(self)
                     self.currentShortcuts = [1, 7, 16]
                     pg.mouse.set_cursor(*pg.cursors.arrow)
-                    pg.key.set_repeat(500, 100)
                     pg.mouse.set_pos(data.MIDDLE_OF_THE_SCREEN)
 
                 if 13 in self.currentShortcuts:
                     all_keys = pg.key.get_pressed()
-                    if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F1]:
+                    if (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_1]:
                         self.createBuilding(0)
-                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F2]:
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_2]:
                         self.createBuilding(1)
-                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F3]:
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_3]:
                         self.createBuilding(2)
-                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F4]:
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_4]:
                         self.createBuilding(3)
-                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F5]:
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_5]:
                         self.createBuilding(4)
-                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F6]:
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_6]:
                         self.createBuilding(5)
-                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_F7]:
+                    elif (all_keys[pg.K_LSHIFT] or all_keys[pg.K_RSHIFT]) and all_keys[pg.K_7]:
                         self.createBuilding(6)
             if event.type == pg.MOUSEBUTTONUP and 16 in self.currentShortcuts:
                 self.settings.getElement(pg.mouse.get_pos())
@@ -233,7 +239,6 @@ class Game:
                 self.settings.kill()
                 self.settings = None
                 pg.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
-                pg.key.set_repeat(500, 100)
 
     def createBuildings(self):
 
@@ -254,7 +259,7 @@ class Game:
         self.money += self.production * time_diff
         self.resources.kill()
         self.resources = ResourcesBar.ResourcesBar(self)
-        self.updateBitcoin()
+        # self.updateBitcoin()
 
     def calculateProduction(self):
         buildings = self.buildings
@@ -317,9 +322,23 @@ class Game:
                 self.settings = Settings.Settings(self)
                 self.currentShortcuts = [1, 7, 16]
 
-    def updateBitcoin(self, force=False):
-        if self.counter_btc > 0 and not force:
-            self.counter_btc -= 1
-        else:
-            self.counter_btc = 1000
+    def threadingBitcoin(self):
+        while True:
+            print("Get bitcoin")
             self.bitcoin_price = json.loads(urllib.request.urlopen(self.url_btc).read())[0]["price"]
+            print("Got bitcoin value: " + self.bitcoin_price)
+            time.sleep(10)
+
+    def autoSave(self):
+        while True:
+            saveBuildings = []
+            for buildings in self.buildings:
+                cache = []
+                for items in range(3):
+                    cache.append(buildings[items])
+                saveBuildings.append(cache)
+
+            self.cacheBuildings = saveBuildings
+            self.localCloud.updateUserData(self, auto_save=True)
+            print("saved")
+            time.sleep(3)

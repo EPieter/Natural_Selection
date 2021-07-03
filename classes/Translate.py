@@ -20,7 +20,7 @@ translation = {
         "Left Ctrl": "Ctrl links",
         "Return": "Enter",
         "Delete": "Delete",
-        "Shift + F1-7": "Shift + F1-7",
+        "Shift + 1-7": "Shift + 1-7",
         "L": "L",
         "Escape game": "Verlaat spel",
         "Move left": "Ga naar links",
@@ -50,7 +50,9 @@ translation = {
         "Mouse": "Muis",
         "Click": "Klik",
         "On": "Aan",
-        "Off": "Uit"
+        "Off": "Uit",
+        "persons": "personen",
+        "workers": "werkers"
     },
 }
 

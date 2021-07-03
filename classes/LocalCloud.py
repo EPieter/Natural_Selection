@@ -50,9 +50,9 @@ class LocalCloud:
         self.getUserData()
         return self.userdata
 
-    def updateUserData(self, game):
+    def updateUserData(self, game, auto_save=False):
         self.userdata['location'] = [game.location_x, game.location_y]
-        self.userdata['buildings'] = game.buildings
+        self.userdata['buildings'] = game.buildings if not auto_save else game.cacheBuildings
         self.userdata['money'] = game.money
         self.userdata['people'] = game.people_in_the_city
         self.userdata['dark_mode'] = game.dark_mode
