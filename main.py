@@ -1,4 +1,19 @@
-from classes import Game
+import os
+import base64
+
+appdata = os.getenv("APPDATA")
+if not os.path.exists(appdata + "/Natural_Selection/Sprites/install.txt"):
+    from classes import Install
+    Install.install()
+else:
+    file = open(appdata + "/Natural_Selection/Sprites/install.txt", "rb")
+    file_content = str(base64.urlsafe_b64decode(file.read()), "utf-8")
+    if not file_content == "version 1.7.beta3":
+        from classes import Update
+        Update.Update()
+
+if True:
+    from classes import Game
 
 # start the game
 running = True
