@@ -48,6 +48,7 @@ class Game:
         self.dt = self.clock.tick(data.FPS) / 1000
         self.people_in_the_city = self.userdata['people']
         self.money = self.userdata['money']
+        self.production = 0
         self.createBuildings()
         self.calculateProduction()
         self.resources = ResourcesBar.ResourcesBar(self)
@@ -66,7 +67,6 @@ class Game:
         thread2 = Thread(target=self.autoSave, args=())
         thread2.daemon = True  # Daemonize thread
         thread2.start()  # Start the execution
-
 
     def new(self):
         # initialize all variables and do all the setup for a new game
