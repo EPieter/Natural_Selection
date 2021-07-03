@@ -47,6 +47,7 @@ class Store(pg.sprite.Sprite):
             for j in range(4):
                 if i * 4 + j < 7:
                     self.image.blit(sprites.menu_items[i * 4 + j][1], (10 + i * 300, 38 + j * 76, 76, 76))
+                    
                     price = sprites.menu_items[i * 4 + j][2] if sprites.menu_items[i * 4 + j][
                                                                     0] != "Bitcoin" else float(game.bitcoin_price)
                     text = font.render(
@@ -86,6 +87,7 @@ class Store(pg.sprite.Sprite):
                     elif sprites.menu_items[i * 4 + j][5] != 0:
                         text = font.render(str(sprites.menu_items[i * 4 + j][5]) + " " + data.tr.get("workers").capitalize(), True, color_max)
                         text_rect = (10 + 1.2 * 76 + i * 300, 62 + j * 76, 500, 24)
+
                         self.image.blit(text, text_rect)
 
     def isActive(self):
