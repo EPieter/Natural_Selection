@@ -57,7 +57,7 @@ def addToStartMenu():
                                                    r'Menu\Programs\Natural ' \
                                                    r'Selection.lnk'
 
-    target = os.getcwd() + "/Natural Selection v" + version + ".exe"
+    target = os.getcwd() + "/NaturalSelection.v" + version + ".exe"
     icon = appdata + "/Natural_Selection/Sprites/icon.ico"
     shell = win32com.client.Dispatch("WScript.Shell")
     shortcut = shell.CreateShortCut(path)
