@@ -135,6 +135,10 @@ class Game:
                 elif event.key == pg.K_LCTRL and 8 in self.currentShortcuts:
                     self.shortCuts = Shortcuts.Shortcuts(self)
                     self.currentShortcuts = [1, 7]
+                elif ((event.key == pg.K_a) or (event.key == pg.K_LEFT)) and 9 in self.currentShortcuts:
+                    self.store.selector.move(dx=-1)
+                elif ((event.key == pg.K_d) or (event.key == pg.K_RIGHT)) and 10 in self.currentShortcuts:
+                    self.store.selector.move(dx=1)
 
                 elif ((event.key == pg.K_w) or (event.key == pg.K_UP)) and 9 in self.currentShortcuts:
                     self.store.selector.move(dy=-1)
