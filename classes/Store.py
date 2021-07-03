@@ -45,7 +45,6 @@ class Store(pg.sprite.Sprite):
         font = pg.font.Font(data.font, 20)
         for i in range(2):
             for j in range(4):
-                print(i * 4 + j)
                 if i * 4 + j < 7:
                     self.image.blit(sprites.menu_items[i * 4 + j][1], (10 + i * 300, 38 + j * 76, 76, 76))
                     price = sprites.menu_items[i * 4 + j][2] if sprites.menu_items[i * 4 + j][0] != "Bitcoin" else float(game.bitcoin_price)
