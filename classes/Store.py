@@ -47,41 +47,48 @@ class Store(pg.sprite.Sprite):
             for j in range(4):
                 if i * 4 + j < 7:
                     self.image.blit(sprites.menu_items[i * 4 + j][1], (10 + i * 300, 38 + j * 76, 76, 76))
-                    price = sprites.menu_items[i * 4 + j][2] if sprites.menu_items[i * 4 + j][0] != "Bitcoin" else float(game.bitcoin_price)
-                    text = font.render(data.ToolStore.moneySymbol() + ' ' + data.ToolStore.priceFormatterIncludeCalc(price), True, data.WHITE_TEXT)
-                    text_rect = (10 + 1.2 * 76 + i * 300, 42 + j * 76, 500, 24)
+                    
+                    price = sprites.menu_items[i * 4 + j][2] if sprites.menu_items[i * 4 + j][
+                                                                    0] != "Bitcoin" else float(game.bitcoin_price)
+                    text = font.render(
+                        data.ToolStore.moneySymbol() + ' ' + data.ToolStore.priceFormatterIncludeCalc(price), True,
+                        data.WHITE_TEXT)
+                    text_rect = (10 + 1.2 * 76 + i * 300, 40 + j * 76, 500, 24)
                     self.image.blit(text, text_rect)
                     if sprites.menu_items[i * 4 + j][3] != 0:
-                        text = font.render(str(sprites.menu_items[i * 4 + j][3]), True, color_p)
-                        text_rect = (10 + 1.2 * 76 + i * 300, 64 + j * 76, 500, 24)
+                        text = font.render(
+                            str(sprites.menu_items[i * 4 + j][3]) + " " + data.tr.get("persons").capitalize(), True,
+                            color_p)
+                        text_rect = (10 + 1.2 * 76 + i * 300, 62 + j * 76, 500, 24)
                         self.image.blit(text, text_rect)
                         if sprites.menu_items[i * 4 + j][4] != 0:
                             text = font.render(
-                                str(data.ToolStore.priceFormatterIncludeCalc(sprites.menu_items[j][4], ",.3f")), True,
+                                str(data.ToolStore.priceFormatterIncludeCalc(sprites.menu_items[j][4],
+                                                                             ",.3f")) + ' ' + data.ToolStore.moneySymbol() + '/sp',
+                                True,
                                 color_pr)
-                            text_rect = (10 + 1.2 * 76 + i * 300, 86 + j * 76, 500, 24)
+                            text_rect = (10 + 1.2 * 76 + i * 300, 84 + j * 76, 500, 24)
                             self.image.blit(text, text_rect)
                         elif sprites.menu_items[i * 4 + j][5] != 0:
-                            text = font.render(str(sprites.menu_items[i * 4 + j][5]), True, color_max)
-                            text_rect = (10 + 1.2 * 76 + i * 300, 86 + j * 76, 500, 24)
+                            text = font.render(str(sprites.menu_items[i * 4 + j][5]) + " " + data.tr.get("workers").capitalize(), True, color_max)
+                            text_rect = (10 + 1.2 * 76 + i * 300, 84 + j * 76, 500, 24)
                             self.image.blit(text, text_rect)
                     elif sprites.menu_items[i * 4 + j][4] != 0:
-                        text = font.render(str(data.ToolStore.priceFormatterIncludeCalc(sprites.menu_items[i * 4 + j][4], ",.3f")), True, color_pr)
-                        text_rect = (10 + 1.2 * 76 + i * 300, 64 + j * 76, 500, 24)
+                        text = font.render(
+                            str(data.ToolStore.priceFormatterIncludeCalc(sprites.menu_items[i * 4 + j][4],
+                                                                         ",.3f")) + ' ' + data.ToolStore.moneySymbol() + '/sp',
+                            True, color_pr)
+                        text_rect = (10 + 1.2 * 76 + i * 300, 62 + j * 76, 500, 24)
                         self.image.blit(text, text_rect)
                         if sprites.menu_items[i * 4 + j][5] != 0:
-                            text = font.render(str(sprites.menu_items[i * 4 + j][5]), True, color_max)
-                            text_rect = (10 + 1.2 * 76 + i * 300, 86 + j * 76, 500, 24)
+                            text = font.render(str(sprites.menu_items[i * 4 + j][5]) + " " + data.tr.get("workers").capitalize(), True, color_max)
+                            text_rect = (10 + 1.2 * 76 + i * 300, 84 + j * 76, 500, 24)
                             self.image.blit(text, text_rect)
                     elif sprites.menu_items[i * 4 + j][5] != 0:
-                        text = font.render(str(sprites.menu_items[i * 4 + j][5]), True, color_max)
-                        text_rect = (10 + 1.2 * 76 + i * 300, 64 + j * 76, 500, 24)
+                        text = font.render(str(sprites.menu_items[i * 4 + j][5]) + " " + data.tr.get("workers").capitalize(), True, color_max)
+                        text_rect = (10 + 1.2 * 76 + i * 300, 62 + j * 76, 500, 24)
+
                         self.image.blit(text, text_rect)
 
     def isActive(self):
         return self.alive()
-
-
-
-
-

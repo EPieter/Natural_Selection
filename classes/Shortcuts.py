@@ -26,7 +26,7 @@ class Shortcuts(pg.sprite.Sprite):
             [data.tr.get("S or arrow down"), data.tr.get("Select below")],
             [data.tr.get("Return"), data.tr.get("Purchase and place building")],
             [data.tr.get("Delete"), data.tr.get("Delete Building")],
-            [data.tr.get("Shift + F1-7"), data.tr.get("Shortcut for placing buildings")],
+            [data.tr.get("Shift + 1-7"), data.tr.get("Shortcut for placing buildings")],
             [data.tr.get("L"), data.tr.get("Enter dark or light mode")],
             [data.tr.get("F1"), data.tr.get("Settings")],
             [data.tr.get("Mouse"), data.tr.get("Click")],
